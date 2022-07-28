@@ -6,23 +6,6 @@
   </q-layout>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
 
-export default {
-  name: 'AuthLayout',
-  data () {
-    return {
-    }
-  },
-
-  computed: {
-    ...mapState({
-      pageTitle: state => state.common.pageTitle
-    })
-  }
-}
 </script>
-
-<style>
-</style>
