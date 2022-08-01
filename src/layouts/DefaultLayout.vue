@@ -25,7 +25,7 @@
 
         <component :is="headerAction" />
 
-        <select-language class="q-pl-md" />
+        <!-- <select-language class="q-pl-md" /> -->
       </q-toolbar>
     </q-header>
 
