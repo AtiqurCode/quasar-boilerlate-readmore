@@ -1,11 +1,11 @@
-import { Dialog, Notify } from 'quasar'
+import { Dialog } from 'quasar'
 
 export default {
-  setPageTitle ({ commit }, payload) {
+  setPageTitle (payload) {
     this.pageTitle = payload
   },
 
-  setHeaderAction ({ commit }, payload) {
+  setHeaderAction (payload) {
     this.headerAction = payload
   },
 
@@ -16,7 +16,7 @@ export default {
   ** method is costly. So, don't use it unless you
   ** really need to re-render your visual components.
   */
-  reRenderComponent ({ commit }) {
+  reRenderComponent () {
     const randomKey = Math.random()
     this.reRenderKey = randomKey
   },
@@ -25,11 +25,11 @@ export default {
   *** Error can be handled locally rather than the global scope
   *** by sending a Boolean parameter.
   */
-  handleErrorLocally ({ commit }, payload) {
+  handleErrorLocally (payload) {
     this.localErrorHandling = payload
   },
 
-  renderAlertDialog ({ commit }, { title, message, configs, confirm, cancel }) {
+  renderAlertDialog ({ title, message, configs, confirm, cancel }) {
     if (!window.dialogCounter) window.dialogCounter = 1
     else window.dialogCounter++
 
@@ -58,17 +58,11 @@ export default {
     }
   },
 
-  createNotify ({ commit }, configs = {}) {
-    Notify.create({
-      ...configs
-    })
-  },
-
-  setLoading ({ commit }, payload = true) {
+  setLoading (payload = true) {
     this.loading = payload
   },
 
-  setFetching ({ commit }, payload = true) {
+  setFetching (payload = true) {
     this.fetching = payload
   }
 }
