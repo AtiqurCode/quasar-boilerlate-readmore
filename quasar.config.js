@@ -60,6 +60,11 @@ module.exports = configure(function (/* ctx */) {
         node: 'node16'
       },
 
+      alias: {
+        modules: path.join(__dirname, './src/modules'),
+        services: path.join(__dirname, './src/services')
+      },
+
       vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
