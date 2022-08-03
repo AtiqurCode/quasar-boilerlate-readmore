@@ -1,4 +1,4 @@
-import Api from 'src/services/authService'
+import Api from 'services/authService'
 import { useCommonStore } from 'stores/common-store'
 
 export default {

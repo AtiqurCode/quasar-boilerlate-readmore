@@ -1,27 +1,25 @@
+import { routes as auth } from 'modules/auth'
+// import { routes as register } from 'modules/register'
+// import { routes as dashboard } from 'modules/dashboard'
+// import { routes as companies } from 'modules/companies'
+// import { routes as projects } from 'modules/projects'
+// import { routes as projectsJobs } from 'modules/projectsJobs'
+// import { routes as userAccess } from 'modules/userAccess'
+// import { routes as customer } from 'modules/customer'
+// import { routes as contacts } from 'modules/contacts'
+// import { routes as settings } from 'modules/settings'
 
 const routes = [
-  {
-    path: '/',
-    component: () => import('layouts/DefaultLayout.vue'),
-    children: [
-      {
-        name: 'dashboard',
-        path: '',
-        component: () => import('pages/IndexPage.vue'),
-        meta: {
-          requiresAuth: false
-        }
-      },
-      {
-        name: 'login',
-        path: 'login',
-        component: () => import('pages/ErrorNotFound.vue'),
-        meta: {
-          requiresAuth: false
-        }
-      }
-    ]
-  },
+  ...auth,
+  // ...register,
+  // ...dashboard,
+  // ...companies,
+  // ...projects,
+  // ...projectsJobs,
+  // ...userAccess,
+  // ...customer,
+  // ...contacts,
+  // ...settings,
 
   // Always leave this as last one,
   // but you can also remove it

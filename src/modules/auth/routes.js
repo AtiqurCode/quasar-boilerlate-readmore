@@ -1,14 +1,14 @@
 export default [
   {
-    path: '/auth',
+    path: '/login',
     component: () => import('layouts/AuthLayout'),
     children: [
       {
         path: '',
-        component: () => import('./pages/LoginIndex'),
-        name: 'auth',
+        component: () => import('./pages/LoginIndex.vue'),
+        name: 'login',
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'Login'
         }
       },
@@ -17,7 +17,7 @@ export default [
         component: () => import('./pages/RecoverPassword.vue'),
         name: 'recover-password',
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'Recover Password'
         }
       },
@@ -27,7 +27,7 @@ export default [
         name: 'confirmation',
         props: true,
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'confirmation'
         }
       }
@@ -42,7 +42,7 @@ export default [
         component: () => import('./pages/ResetPassword.vue'),
         name: 'reset-password',
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'reset password'
         }
       }
