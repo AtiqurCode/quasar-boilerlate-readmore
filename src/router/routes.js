@@ -4,7 +4,22 @@ const routes = [
     path: '/',
     component: () => import('layouts/DefaultLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      {
+        name: 'dashboard',
+        path: '',
+        component: () => import('pages/IndexPage.vue'),
+        meta: {
+          requiresAuth: false
+        }
+      },
+      {
+        name: 'login',
+        path: 'login',
+        component: () => import('pages/ErrorNotFound.vue'),
+        meta: {
+          requiresAuth: false
+        }
+      }
     ]
   },
 

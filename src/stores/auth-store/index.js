@@ -10,8 +10,6 @@ export const useAuthStore = defineStore('auth', {
   }),
   getters: {
     apiToken: (state) => state.userAuthInfo && state.userAuthInfo.access_token,
-    defaultCompany: (state) => state.defaultCompany,
-    userProfile: (state) => ({ ...state.userProfile }),
     hasPermission: (state) => permission => state.permissions.some(item => item === permission)
   },
   actions
