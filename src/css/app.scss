@@ -31,5 +31,14 @@
       border-radius: 6px;
     }
   }
-
+}
+// handle dark mode
+.body--dark {
+  .itc-input {
+    &.q-field.q-field--outlined {
+      &.q-field--float .q-field__label {
+        background: var(--q-dark-page);
+      }
+    }
+  }
 }
