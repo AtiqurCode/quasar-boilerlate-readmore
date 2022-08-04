@@ -101,7 +101,7 @@
           color="white"
           align="center"
           size="lg"
-          class="q-pa-md"
+          class="q-pa-md neumorphic"
           @click="socialLogin('google')"
         >
           <q-tooltip>
@@ -113,7 +113,7 @@
           color="white"
           align="center"
           size="lg"
-          class="q-pa-md"
+          class="q-pa-md neumorphic"
           @click="socialLogin('facebook')"
         >
           <q-tooltip>
@@ -125,7 +125,7 @@
           color="white"
           align="center"
           size="lg"
-          class="q-pa-md"
+          class="q-pa-md neumorphic"
           @click="socialLogin('apple')"
         >
           <q-tooltip>
@@ -137,7 +137,7 @@
           color="white"
           align="center"
           size="lg"
-          class="q-pa-md"
+          class="q-pa-md neumorphic"
           @click="socialLogin('live')"
         >
           <q-tooltip>
@@ -188,3 +188,10 @@ const handleLogin = async () => {
 
 const socialLogin = (provider) => { }
 </script>
+
+<style scoped>
+  .neumorphic::before {
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow:  22px 22px 44px #d9d9d9, -22px -22px 44px #ffffff;
+  }
+</style>
