@@ -1,47 +1,62 @@
 <template>
-  <q-page padding>
+  <q-page
+    padding
+    class="row justify-center items-center"
+  >
     <q-card
       style="max-width: 400px;"
-      class="q-mx-auto q-mt-lg"
+      class="text-center"
       square
       flat
     >
-      <q-card-section class="q-pt-lg">
+      <q-card-section>
         <q-img
-          src="~assets/logo_full.png"
+          src="~assets/logo-horizontal.svg"
           spinner-color="primary"
-          contain
-          style="max-height: 50px; max-width: 100%;"
+          style="max-height: 50px; max-width: 100%; margin-bottom: 5vh;"
         />
       </q-card-section>
       <q-form @submit="handleLogin">
         <q-card-section>
           <q-input
-            v-model.trim="email"
+            v-model="email"
+            class="itc-input required"
+            stack-label
+            outlined
             label="Email"
             placeholder="login@example.com"
             type="email"
             autofocus
             clearable
+            clear-icon="close"
             :rules="[
-              val => !!val || 'Field is required',
+              val => !!val || 'Email is required',
               val => validateEmail(val) || 'Type a valid Email'
             ]"
-          />
+          >
+            <template #prepend>
+              <q-icon name="o_email" />
+            </template>
+          </q-input>
           <q-input
-            v-model.trim="password"
-            class="q-pt-sm"
+            v-model="password"
+            class="itc-input required"
+            stack-label
+            outlined
             label="Password"
             placeholder="password"
             :type="isPwd ? 'password' : 'text'"
             :rules="[
-              val => !!val || 'Field is required',
-              val => val.length >= 6 || 'Minimum length 6'
+              val => !!val || 'Password is required',
+              val => val.length >= 6 || 'Minimum 6 characters required'
             ]"
           >
-            <template v-slot:append>
+            <template #prepend>
+              <q-icon name="o_key" />
+            </template>
+            <template #append>
               <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
+                :name="isPwd ? 'o_visibility' : 'o_visibility_off'"
                 class="cursor-pointer"
                 @click="isPwd = !isPwd"
               />
@@ -49,145 +64,127 @@
           </q-input>
         </q-card-section>
 
-        <q-card-actions
-          align="right"
-          class="q-px-md"
-        >
+        <q-card-actions class="q-pt-none">
           <q-btn
-            label="login"
+            label="Log In"
             color="primary"
-            class="q-px-md"
-            :loading="$store.state.common.loading"
+            size="lg"
+            no-caps
+            class="full-width"
+            full
+            :loading="commonStore.loading"
             type="submit"
           />
         </q-card-actions>
       </q-form>
-      <q-card-section class="q-pt-none">
-        Forgot your password?
+      <q-card-section class="q-pt-none text-caption">
+        Forgot password?
         <q-btn
           flat
           dense
+          no-caps
+          size="0.75rem"
+          class="q-py-none"
           color="primary"
-          @click="$router.push({name: 'recover-password'})"
+          @click="router.push({name: 'recover-password'})"
         >
           Recover
         </q-btn>
       </q-card-section>
 
-      <q-separator inset />
-
-      <!-- <q-card-actions
-        vertical
-        class="q-px-md"
-        align="left"
-      >
+      <q-card-section class="q-pt-xl row justify-around">
+        <p class="full-width">
+          Or sign in with
+        </p>
         <q-btn
-          color="green"
-          style="width: 300px;"
-          label="Login with Google"
-          icon="fab fa-google"
-          class="q-px-md q-my-sm"
-          align="left"
+          icon="img:icons/google_G_logo.svg"
+          color="white"
+          align="center"
+          size="lg"
+          class="q-pa-md"
           @click="socialLogin('google')"
-        />
+        >
+          <q-tooltip>
+            Google
+          </q-tooltip>
+        </q-btn>
         <q-btn
-          color="blue"
-          style="width: 300px;"
-          label="Login with Facebook"
-          icon="fab fa-facebook"
-          class="q-px-md q-my-sm"
-          align="left"
+          icon="img:icons/facebook_f_logo.svg"
+          color="white"
+          align="center"
+          size="lg"
+          class="q-pa-md"
           @click="socialLogin('facebook')"
-        />
+        >
+          <q-tooltip>
+            Facebook
+          </q-tooltip>
+        </q-btn>
         <q-btn
-          color="red"
-          style="width: 300px;"
-          label="Login with Microsoft Live"
-          icon="fab fa-windows"
-          class="q-px-md q-my-sm"
-          align="left"
+          icon="img:icons/apple_logo.svg"
+          color="white"
+          align="center"
+          size="lg"
+          class="q-pa-md"
+          @click="socialLogin('apple')"
+        >
+          <q-tooltip>
+            Apple
+          </q-tooltip>
+        </q-btn>
+        <q-btn
+          icon="img:icons/microsoft_live_logo.svg"
+          color="white"
+          align="center"
+          size="lg"
+          class="q-pa-md"
           @click="socialLogin('live')"
-        />
-      </q-card-actions> -->
+        >
+          <q-tooltip>
+            MS Live
+          </q-tooltip>
+        </q-btn>
+      </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        New to our system?
+      <q-card-section class="text-caption">
+        Don't have an account?
         <q-btn
           flat
           dense
+          no-caps
+          size="0.75rem"
+          class="q-py-none"
           color="primary"
           @click="$router.push('/register')"
         >
-          Register
+          Register Now
         </q-btn>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
-import { validateEmail } from 'src/validationServices'
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from 'stores/auth-store'
+import { useCommonStore } from 'stores/common-store'
+import { validateEmail } from 'utilities/validators'
 
-/**
- * @module Auth/pages/LoginIndex
- * @author S.M. Shakil Islam<sm.shakil@itconquest.com>
- * @description Renders Login Forms
- * @vue-data {String} [email=null] - Email address of a user
- * @vue-data {String} [password=null] - Password of a user
- * @vue-data {Boolean} [isPwd=true] - Confirm password during registration
- * @vue-data {String} [emailValidationRegex] - Regex string to validate Email
- * @vue-computed {Object} [UserData = null] - logged in user information
- * @vue-computed {Object} [error=null] - Holds login form errors
- * @vue-computed {Boolean} [loading=false] - Loading state of login form
- */
-export default {
-  name: 'LoginIndex',
+const email = ref('')
+const password = ref('')
+const isPwd = ref(true)
 
-  data () {
-    return {
-      email: '',
-      password: '',
-      isPwd: true,
-      loading: false
-    }
-  },
+const commonStore = useCommonStore()
+const authStore = useAuthStore()
+const router = useRouter()
 
-  computed: {
-    UserData () {
-      return {
-        email: this.email,
-        password: this.password
-      }
-    }
-  },
-
-  methods: {
-    onClickButton () { },
-    validateEmail,
-    ...mapActions({
-      login: 'auth/logUserIn'
-    }),
-    /**
-     * @description Dispatch handleLogin method to log in a user. This uses `email` and `password`
-     * from Auth Store and redirect user to **dashboard** page
-     * @todo Exception not handled properly
-     * @async
-     */
-    handleLogin () {
-      this.login({ data: this.UserData }).then(() => {
-        this.$router.push('/dashboard')
-      })
-    },
-
-    /**
-     * @description Dispatch socialLogin method to log in a user using Social Account.
-     * from Auth Store and redirect user to **dashboard** page
-     * @todo Exception not handled properly
-     * @async
-     */
-    socialLogin (provider) {
-    }
-  }
+const handleLogin = async () => {
+  try {
+    await authStore.logUserIn({ data: { email: email.value, password: password.value } })
+    router.push({ name: 'dashboard' })
+  } catch {}
 }
+
+const socialLogin = (provider) => { }
 </script>
