@@ -1,4 +1,4 @@
-import client from 'src/services/client'
+import client from './client'
 
 /**
  * @module Auth/api/auth
@@ -15,7 +15,7 @@ export default {
    * @throws {Promise} ErrorUserLogin - error promise object
    */
   login ({ data, service = undefined }) {
-    return client(service).post('login', data, { noAuthRequired: true, notifyOptions: { message: 'Logged in successfully' } })
+    return client(service).post('login', data, { requiresAuth: false, notifyOptions: { message: 'Logged in successfully' } })
   },
 
   /**
@@ -24,9 +24,9 @@ export default {
    * @returns {Promise} void
    */
   logout () {
-    return client().delete('logout', { noAuthRequired: true, notifyOptions: { message: 'User logged out successfully' } })
+    return client().delete('logout', { requiresAuth: false, notifyOptions: { message: 'User logged out successfully' } })
   },
   forgotPassword (payload) {
-    return client().post('forgotpassword', payload, { noAuthRequired: true, noNotification: true })
+    return client().post('forgotpassword', payload, { requiresAuth: false, noNotification: true })
   }
 }

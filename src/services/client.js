@@ -51,7 +51,7 @@ export default function client (serviceName = 'default') {
         url: `companies/${defaultCompany}/${request.url}`
       }
     }
-    if (!accessToken && !request.noAuthRequired) {
+    if (!accessToken && request.requiresAuth) {
       const CancelToken = axios.CancelToken
       return {
         ...request,
