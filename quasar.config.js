@@ -50,7 +50,8 @@ module.exports = configure(function (/* ctx */) {
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      'material-icons', // optional, you are not bound to it
+      'material-icons-outlined'
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
@@ -62,7 +63,8 @@ module.exports = configure(function (/* ctx */) {
 
       alias: {
         modules: path.join(__dirname, './src/modules'),
-        services: path.join(__dirname, './src/services')
+        services: path.join(__dirname, './src/services'),
+        utilities: path.join(__dirname, './src/utilities')
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
