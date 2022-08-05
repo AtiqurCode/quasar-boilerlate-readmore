@@ -1,26 +1,26 @@
 export default [
   {
-    path: '/register',
-    component: () => import('layouts/AuthLayout'),
+    path: '/registration',
+    component: () => import('layouts/AuthLayout.vue'),
     children: [
       {
         path: '',
-        component: () => import('./pages/Registration'),
-        name: 'Registration',
+        component: () => import('./pages/RegistrationIndex.vue'),
+        name: 'registration',
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'Registration'
         }
-      },
-      {
-        path: 'email-verification',
-        component: () => import('./pages/EmailVerification'),
-        name: 'EmailVerification',
-        meta: {
-          noAuthRequired: true,
-          title: 'Email Verification'
-        }
       }
+      // {
+      //   path: 'email-verification',
+      //   component: () => import('./pages/EmailVerification'),
+      //   name: 'EmailVerification',
+      //   meta: {
+      //     noAuthRequired: true,
+      //     title: 'Email Verification'
+      //   }
+      // }
     ]
   }
 ]

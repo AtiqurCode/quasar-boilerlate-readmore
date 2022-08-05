@@ -1,5 +1,5 @@
 import { routes as auth } from 'modules/auth'
-// import { routes as register } from 'modules/register'
+import { routes as register } from 'modules/register'
 // import { routes as dashboard } from 'modules/dashboard'
 // import { routes as companies } from 'modules/companies'
 // import { routes as projects } from 'modules/projects'
@@ -11,7 +11,7 @@ import { routes as auth } from 'modules/auth'
 
 const routes = [
   ...auth,
-  // ...register,
+  ...register,
   // ...dashboard,
   // ...companies,
   // ...projects,
