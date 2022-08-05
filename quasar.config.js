@@ -83,7 +83,9 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf (viteConf, { isServer, isClient }) {
+        viteConf.envPrefix = 'ITC'
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
