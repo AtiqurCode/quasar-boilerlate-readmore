@@ -18,7 +18,7 @@
       <q-form @submit="handleRegistration">
         <q-card-section>
           <q-input
-            v-model.trim="form.firstName"
+            v-model.trim="form.first_name"
             class="itc-input required"
             stack-label
             outlined
@@ -31,7 +31,7 @@
             ]"
           />
           <q-input
-            v-model.trim="form.lastName"
+            v-model.trim="form.last_name"
             class="itc-input required"
             stack-label
             outlined
@@ -132,8 +132,8 @@ import { validateEmail } from 'utilities/validators'
 import { APP_ID } from 'src/consts'
 
 const form = reactive({
-  firstName: '',
-  lastName: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: ''
 })
@@ -145,7 +145,9 @@ const registerStore = useRegisterStore()
 const router = useRouter()
 
 const handleRegistration = async () => {
-  await registerStore.registerUser({ ...form, client_app_id: APP_ID })
-  router.push({ name: 'emailVerification', query: { email: form.email } })
+  try {
+    await registerStore.registerUser({ ...form, client_app_id: APP_ID })
+    router.push({ name: 'emailVerification', query: { email: form.email } })
+  } catch {}
 }
 </script>
