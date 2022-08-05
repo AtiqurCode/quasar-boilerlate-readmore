@@ -1,4 +1,5 @@
-export const API_BASE_URL = serviceName => `${import.meta.env.ITC_API_BASE_PROTOCOL || 'http'}://${import.meta.env.ITC_API_BASE_DOMAIN || 'localhost'}`
+const services = JSON.parse(import.meta.env?.ITC_SERVICES || '{}')
+export const API_BASE_URL = serviceName => `${services[serviceName]?.API_BASE_PROTOCOL || 'http'}://${services[serviceName]?.API_BASE_DOMAIN || 'localhost'}`
 
 export const API_URL = serviceName => `${API_BASE_URL(serviceName)}/api/v1/`
 
