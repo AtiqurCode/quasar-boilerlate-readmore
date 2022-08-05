@@ -1,11 +1,11 @@
-export const API_BASE_URL = serviceName => `${process.env.services[serviceName].API_BASE_PROTOCOL || 'http'}://${process.env.services[serviceName].API_BASE_DOMAIN || 'localhost'}`
+export const API_BASE_URL = serviceName => `${import.meta.env.ITC_API_BASE_PROTOCOL || 'http'}://${import.meta.env.ITC_API_BASE_DOMAIN || 'localhost'}`
 
 export const API_URL = serviceName => `${API_BASE_URL(serviceName)}/api/v1/`
 
-export const APP_ID = 'main'
-export const STORAGE_KEY = 'QUASAR_BOILERPLATE_v2'
-export const APP_NAME = 'quasar-boilerplate-v2'
-export const DEFAULT_PAGE_TITLE = 'Quasar Boilerplate v2.0'
+export const APP_ID = import.meta.env.ITC_APP_ID
+export const STORAGE_KEY = import.meta.env.ITC_STORAGE_KEY
+export const APP_NAME = import.meta.env.ITC_APP_NAME
+export const DEFAULT_PAGE_TITLE = import.meta.env.ITC_DEFAULT_PAGE_TITLE
 
 export const COMPANY_TYPE = {
   SOLE_PROPRIETORSHIP: 'Sole Proprietorship',
