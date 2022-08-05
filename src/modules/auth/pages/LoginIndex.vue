@@ -4,9 +4,8 @@
     class="row justify-center items-center"
   >
     <q-card
-      style="max-width: 400px;"
+      style="width: 400px; max-width: 100%;"
       class="text-center"
-      square
       flat
     >
       <q-card-section>
@@ -86,10 +85,9 @@
           size="0.75rem"
           class="q-py-none"
           color="primary"
+          label="Recover"
           @click="router.push({name: 'recover-password'})"
-        >
-          Recover
-        </q-btn>
+        />
       </q-card-section>
 
       <q-card-section class="q-pt-xl row justify-around">
@@ -155,10 +153,9 @@
           size="0.75rem"
           class="q-py-none"
           color="primary"
-          @click="$router.push('/register')"
-        >
-          Register Now
-        </q-btn>
+          label="Register Now"
+          @click="router.push({name: 'registration'})"
+        />
       </q-card-section>
     </q-card>
   </q-page>
