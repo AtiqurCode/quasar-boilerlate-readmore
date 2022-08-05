@@ -148,43 +148,4 @@ const handleRegistration = async () => {
   await registerStore.registerUser({ ...form, client_app_id: APP_ID })
   router.push({ name: 'emailVerification', query: { email: form.email } })
 }
-
-// export default {
-//   name: 'Registration',
-
-//   data () {
-//     return {
-//       firstName: '',
-//       lastName: '',
-//       email: '',
-//       password: '',
-//       confirmPass: '',
-//       isPwd: true,
-//       loading: false
-//     }
-//   },
-
-//   computed: {
-//     UserData () {
-//       return {
-//         first_name: this.firstName,
-//         last_name: this.lastName,
-//         email: this.email,
-//         password: this.password,
-//         client_app_id: APP_ID
-//       }
-//     }
-//   },
-
-//   methods: {
-//     validateEmail,
-//     ...mapActions({
-//       registerUser: 'register/registerUser'
-//     }),
-//     async handleRegistration () {
-//       await this.registerUser(this.UserData)
-//       this.$router.push({ name: 'EmailVerification', query: { email: this.email } })
-//     }
-//   }
-// }
 </script>
