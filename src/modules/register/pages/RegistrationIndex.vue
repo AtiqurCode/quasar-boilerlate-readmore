@@ -8,12 +8,8 @@
       class="text-center"
       flat
     >
-      <q-card-section>
-        <q-img
-          src="~assets/logo-horizontal.svg"
-          spinner-color="primary"
-          style="max-height: 50px; max-width: 100%; margin-bottom: 3vh;"
-        />
+      <q-card-section class="q-py-none">
+        <CompanyBranding />
       </q-card-section>
       <q-form @submit="handleRegistration">
         <q-card-section>
@@ -130,6 +126,7 @@ import { useRegisterStore } from 'stores/register-store'
 import { useCommonStore } from 'stores/common-store'
 import { validateEmail } from 'utilities/validators'
 import { APP_ID } from 'src/consts'
+import CompanyBranding from 'src/components/CompanyBranding.vue'
 
 const form = reactive({
   first_name: '',

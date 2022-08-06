@@ -8,12 +8,8 @@
       class="text-center"
       flat
     >
-      <q-card-section>
-        <q-img
-          src="~assets/logo-horizontal.svg"
-          spinner-color="primary"
-          style="max-height: 50px; max-width: 100%; margin-bottom: 5vh;"
-        />
+      <q-card-section class="q-py-none">
+        <CompanyBranding />
       </q-card-section>
       <q-form @submit="handleLogin">
         <q-card-section>
@@ -167,6 +163,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from 'stores/auth-store'
 import { useCommonStore } from 'stores/common-store'
 import { validateEmail } from 'utilities/validators'
+import CompanyBranding from 'components/CompanyBranding.vue'
 
 const email = ref('')
 const password = ref('')
