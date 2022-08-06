@@ -21,20 +21,20 @@
           icon="arrow_back"
           @click="handleBackRoute"
         />
-        <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
+        <q-toolbar-title>{{ commonStore.pageTitle }}</q-toolbar-title>
 
-        <component :is="headerAction" />
+        <!-- <component :is="headerAction" /> -->
 
         <!-- <select-language class="q-pl-md" /> -->
       </q-toolbar>
     </q-header>
 
-    <left-menu
+    <LeftMenu
       v-model:drawer-state="drawer"
       :nav-links="navLinks"
-      :user-profile="userProfile"
-      :companies="companies"
-      :default-company="defaultCompany"
+      :user-profile="authStore.userProfile"
+      :companies="authStore.companies"
+      :default-company="authStore.defaultCompany"
       :logout="handleLogout"
     />
 
@@ -48,10 +48,13 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { ref } from 'vue'
+import { useCommonStore } from 'stores/common-store'
+import { useAuthStore } from 'stores/auth-store'
 import { navLinks } from 'assets/links'
+import LeftMenu from 'src/components/LeftMenu.vue'
 
-const LeftMenu = defineAsyncComponent(() => import('components/LeftMenu'))
+// const LeftMenu = defineAsyncComponent(() => import('components/LeftMenu'))
 // const SelectLanguage = defineAsyncComponent(() => import('components/SelectLanguage'))
 
 const drawer = ref(true)
@@ -66,8 +69,11 @@ const handleBackRoute = () => {
   // }
 }
 
+const commonStore = useCommonStore()
+const authStore = useAuthStore()
+
 const handleLogout = () => {
-  // this.logOutUser()
+  authStore.logOutUser()
 }
 </script>
 
