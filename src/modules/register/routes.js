@@ -11,16 +11,16 @@ export default [
           requiresAuth: false,
           title: 'Registration'
         }
+      },
+      {
+        path: 'email-verification',
+        component: () => import('./pages/EmailVerification.vue'),
+        name: 'emailVerification',
+        meta: {
+          noAuthRequired: true,
+          title: 'Email Verification'
+        }
       }
-      // {
-      //   path: 'email-verification',
-      //   component: () => import('./pages/EmailVerification'),
-      //   name: 'EmailVerification',
-      //   meta: {
-      //     noAuthRequired: true,
-      //     title: 'Email Verification'
-      //   }
-      // }
     ]
   }
 ]

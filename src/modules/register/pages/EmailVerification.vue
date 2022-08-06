@@ -1,19 +1,17 @@
 <template>
-  <q-page padding>
+  <q-page
+    padding
+    class="row justify-center items-center"
+  >
     <q-card
-      style="max-width: 500px;"
-      class="q-mx-auto q-mt-lg"
+      style="width: 400px; max-width: 100%;"
+      class="text-center"
       flat
     >
-      <q-card-section class="q-pt-lg">
-        <q-img
-          src="~assets/logo_full.png"
-          spinner-color="primary"
-          contain
-          style="max-height: 50px; max-width: 100%;"
-        />
+      <q-card-section class="q-py-none">
+        <CompanyBranding />
       </q-card-section>
-      <q-card-section class="text-center text-subtitle1">
+      <q-card-section class="text-subtitle1">
         <h6 class="q-mt-none q-mb-md">
           Please verify your email
         </h6>
@@ -25,58 +23,51 @@
           Just click on the link in that email to complete your registration. If you don't see it, you may need to <b>check your spam</b> folder.
         </p>
       </q-card-section>
-      <!-- <q-card-section class="text-center q-py-none">
-        <p class="q-mt-none q-mb-sm text-subtitle1">
-          Still can't find the email?
-        </p>
+      <q-card-section class="q-py-none text-caption">
+        Still can't find the email?
         <q-btn
-          label="RESEND EMAIL"
+          flat
+          dense
+          no-caps
+          size="0.75rem"
+          class="q-py-none"
           color="primary"
-          outline
-          :loading="$store.state.common.loading"
-          @click="handleResendCode"
+          label="Resend Email"
+          :loading="commonStore.loading"
+          @click="handleResendEmail"
         />
-      </q-card-section> -->
-      <q-card-section class="text-center">
+      </q-card-section>
+      <q-card-section class="q-pt-none text-caption">
         Or, if you already verified your Email, you can go to
         <q-btn
           flat
           dense
+          no-caps
+          size="0.75rem"
+          class="q-py-none"
           color="primary"
-          @click="$router.push('/auth')"
-        >
-          Login
-        </q-btn>
+          label="Login"
+          @click="router.push({name: 'login'})"
+        />
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
-<script>
-import { mapActions } from 'vuex'
+<script setup>
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useRegisterStore } from 'stores/register-store'
+import { useCommonStore } from 'stores/common-store'
+import CompanyBranding from 'components/CompanyBranding.vue'
 
-export default {
-  name: 'EmailVerification',
+const commonStore = useCommonStore()
+const registerStore = useRegisterStore()
+const route = useRoute()
+const router = useRouter()
 
-  data () {
-    return {
-      loading: false
-    }
-  },
-
-  methods: {
-    ...mapActions({
-      reSendVerificationEmail: 'register/reSendVerificationEmail'
-    }),
-    handleResendCode () {
-      this.reSendVerificationEmail(this.email)
-    }
-  },
-
-  computed: {
-    email () {
-      return this.$route.query.email
-    }
-  }
+const email = computed(() => route.query.email)
+const handleResendEmail = () => {
+  registerStore.reSendVerificationEmail(email)
 }
 </script>
