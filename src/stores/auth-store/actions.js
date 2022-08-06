@@ -40,7 +40,7 @@ export default {
     // TODO: Reset all stores
     commonStore.$reset()
     this.$reset()
-    this.$router.push('/auth')
+    this.router.push({ name: 'login' })
   },
 
   forgotPassword (userData) {
