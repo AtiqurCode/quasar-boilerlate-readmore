@@ -8,7 +8,7 @@
       class="text-center"
       flat
     >
-      <q-card-section class="q-py-none">
+      <q-card-section>
         <CompanyBranding />
       </q-card-section>
       <q-form @submit="handleRegistration">

@@ -1,8 +1,7 @@
 <template>
   <q-img
-    src="~assets/logo-horizontal.svg"
+    src="/icons/logo-horizontal.png"
     spinner-color="primary"
     fit="contain"
-    height="140px"
   />
 </template>
