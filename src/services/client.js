@@ -123,7 +123,7 @@ function errorHandler (error) {
 
   if (error.response) {
     // Request made and server responded
-    const errStatus = error.response.status
+    const errStatus = error.response?.status || 500
     errStatus === 401 && (unauthorized = true)
     const errFields = error.response.data.errorFields
     message = `
@@ -131,17 +131,16 @@ function errorHandler (error) {
           ${error.response.statusText} with status code ${errStatus}.
         </p>
         <span class="q-my-none">
-          ${error.response.data.errorMessage}.
+          ${error.response?.data?.message}.
         </span>
       `
-    if (errFields.length) {
+    if (errFields?.length) {
       message += ` Wrong ${errFields[0]}`
       let i = 1
       while (i < errFields.length) {
         message += `, ${errFields[i]}`
         i++
       }
-      message += '.'
     }
   } else if (error.message) {
     // Something happened in setting up the request that triggered an Error

@@ -4,7 +4,9 @@ export default {
   async registerUser (payload) {
     try {
       await Api.register(payload)
-    } catch (error) { }
+    } catch (error) {
+      return Promise.reject(error)
+    }
   },
 
   reSendVerificationEmail () {
