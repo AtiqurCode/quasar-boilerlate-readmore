@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-// import { backEndStorageURL } from 'utilities/methods'
+import { backEndStorageURL } from 'utilities/methods'
 import { useAuthStore } from 'stores/auth-store'
 
 const props = defineProps({
@@ -22,25 +22,33 @@ const drawerOpened = computed({
   }
 })
 
-// const fullName = computed(() => {
-//   const {
-//     first_name: fName,
-//     last_name: lName
-//   } = props.userProfile
-//   return `${fName || ''} ${lName || ''}`
-// })
+const fullName = computed(() => {
+  try {
+    const {
+      first_name: fName,
+      last_name: lName
+    } = props.userProfile
+    return `${fName || ''} ${lName || ''}`
+  } catch {
+    return 'No User Found'
+  }
+})
 
 const selectedCompany = computed({
   get () { return props.defaultCompany },
   set () { }
 })
 
-// const profileImage = computed(() => {
-//   const {
-//     avatar: image
-//   } = props.userProfile
-//   return backEndStorageURL(image) || 'https://cdn.quasar.dev/img/boy-avatar.png'
-// })
+const profileImage = computed(() => {
+  try {
+    const {
+      avatar: image
+    } = props.userProfile
+    return backEndStorageURL(image)
+  } catch {
+    return 'https://cdn.quasar.dev/img/boy-avatar.png'
+  }
+})
 
 const defaultCompanyImage = computed(() => {
   const {
@@ -106,12 +114,12 @@ const handleCompanySelection = (id) => {
         style="background: unset;"
       >
         <div>
-          <!-- <q-avatar size="56px">
+          <q-avatar size="56px">
             <img :src="profileImage">
-          </q-avatar> -->
+          </q-avatar>
           <div class="block q-pt-sm vertical-middle">
             <div class="text-weight-bold ellipsis">
-              <!-- {{ fullName }} -->
+              {{ fullName }}
             </div>
             <div
               class="text-weight-light ellipsis"
@@ -127,7 +135,7 @@ const handleCompanySelection = (id) => {
           color="white"
           borderless
           dense
-          :options="companies"
+          :options="props.companies"
           option-value="id"
           option-label="company_name"
           v-model="selectedCompany"

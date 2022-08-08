@@ -1,17 +1,17 @@
 export const navLinks = [
   {
     label: 'Dashboard',
-    icon: 'home',
+    icon: 'o_home',
     hash: '/dashboard'
   },
   {
     label: 'Companies',
-    icon: 'card_travel',
+    icon: 'o_card_travel',
     hash: '/companies'
   },
   {
     label: 'Projects',
-    icon: 'format_list_numbered',
+    icon: 'o_format_list_numbered',
     hash: '/projects'
   },
   // {
@@ -21,17 +21,17 @@ export const navLinks = [
   // },
   {
     label: 'Customers',
-    icon: 'supervised_user_circle',
+    icon: 'o_supervised_user_circle',
     hash: '/customers'
   },
   {
     label: 'Contacts',
-    icon: 'contacts',
+    icon: 'o_contacts',
     hash: '/contacts'
   },
   {
     label: 'User Access',
-    icon: 'verified_user',
+    icon: 'o_verified_user',
     hash: '/user-access'
   },
   // {
@@ -41,7 +41,7 @@ export const navLinks = [
   // },
   {
     label: 'Settings',
-    icon: 'settings',
+    icon: 'o_settings',
     hash: '/settings'
   }
 ]

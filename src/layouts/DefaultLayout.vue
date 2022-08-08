@@ -51,7 +51,7 @@
 import { ref } from 'vue'
 import { useCommonStore } from 'stores/common-store'
 import { useAuthStore } from 'stores/auth-store'
-import { navLinks } from 'assets/links'
+import { navLinks } from 'src/assets/navigation-links'
 import LeftMenu from 'src/components/LeftMenu.vue'
 
 // const LeftMenu = defineAsyncComponent(() => import('components/LeftMenu'))
