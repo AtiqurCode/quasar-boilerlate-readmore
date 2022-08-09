@@ -1,15 +1,10 @@
 import Api from 'services/authService'
 import { useCommonStore } from 'stores/common-store'
+import { useCompanyStore } from 'stores/company-store'
+
+const companyStore = useCompanyStore()
 
 export default {
-  getUserDefaultCompany (companies) {
-    const defaultcompany = companies && companies.find(item => item.default_company === '1')
-
-    if (defaultcompany) return defaultcompany.id
-
-    return companies[0].id
-  },
-
   async logUserIn (payload) {
     const {
       data: {
@@ -21,8 +16,7 @@ export default {
 
     this.userAuthInfo = session
     this.userProfile = userInfo
-    // commit('companies/SET_LOADED_COMPANIES', companies, { root: true })
-    this.defaultCompany = this.getUserDefaultCompany(companies)
+    companyStore.companies = companies
   },
 
   setDefaultCompany (payload) {

@@ -14,5 +14,8 @@ export const useCompanyStore = defineStore('company', {
       return state.companies[0].id
     }
   },
-  actions
+  actions,
+  persist: {
+    paths: ['companies']
+  }
 })
