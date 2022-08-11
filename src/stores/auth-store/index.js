@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import actions from './actions'
+import { STORAGE_KEY } from 'src/consts'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -13,6 +14,7 @@ export const useAuthStore = defineStore('auth', {
   },
   actions,
   persist: {
+    key: `${STORAGE_KEY}_auth`,
     paths: ['userAuthInfo', 'userProfile', 'permissions']
   }
 })

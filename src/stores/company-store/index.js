@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import actions from './actions'
+import { STORAGE_KEY } from 'src/consts'
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
@@ -16,6 +17,7 @@ export const useCompanyStore = defineStore('company', {
   },
   actions,
   persist: {
+    key: `${STORAGE_KEY}_company`,
     paths: ['companies']
   }
 })
