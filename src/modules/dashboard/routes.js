@@ -8,7 +8,7 @@ export default [
         component: () => import('./pages/DashboardIndex.vue'),
         name: 'dashboard',
         meta: {
-          requiresAuth: false,
+          requiresAuth: true,
           title: 'Dashboard'
         }
       }
