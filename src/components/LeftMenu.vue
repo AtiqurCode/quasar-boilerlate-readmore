@@ -114,9 +114,18 @@ const handleCompanySelection = (id) => {
         style="background: unset;"
       >
         <div>
-          <q-avatar size="56px">
-            <img :src="profileImage">
-          </q-avatar>
+          <div class="row justify-between align-start">
+            <q-avatar size="56px">
+              <img :src="profileImage">
+            </q-avatar>
+            <q-btn
+              flat
+              round
+              dense
+              icon="o_chevron_left"
+              @click="drawerOpened = false"
+            />
+          </div>
           <div class="block q-pt-sm vertical-middle">
             <div class="text-weight-bold ellipsis">
               {{ fullName }}

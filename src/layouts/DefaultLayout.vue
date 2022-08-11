@@ -6,19 +6,20 @@
     >
       <q-toolbar>
         <q-btn
-          v-if="!backButton"
+          v-if="!drawer"
           flat
           round
           dense
-          icon="menu"
+          icon="o_menu"
           @click="drawer = !drawer"
         />
         <q-btn
-          v-else
+          v-if="backButton"
           flat
           round
           dense
-          icon="arrow_back"
+          style="height: 2.4em"
+          icon="o_arrow_back"
           @click="handleBackRoute"
         />
         <q-toolbar-title>{{ commonStore.pageTitle }}</q-toolbar-title>
