@@ -108,6 +108,18 @@ e.g. `import {something} from 'utilities/methods'`
 
 To know more on env variables see [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html).
 
+## Assets
+### navigation-links.js
+List of navigation links that are meant to be shown in drawer component.
+#### How to add a new item?
+```bash
+{
+    label: 'Dashboard',   # To be displayed as navigation label.
+    icon: 'o_home',       # [optional] If we want any icon to show at the start of the navigation item.
+    hash: '/dashboard'    # Absolute path of the navigation item.
+  }
+```
+
 ## Boot files
 ### auth.js
 - Handles private/public routing
