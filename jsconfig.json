@@ -23,6 +23,15 @@
       "boot/*": [
         "src/boot/*"
       ],
+      "modules/*": [
+        "src/modules/*"
+      ],
+      "services/*": [
+        "src/services/*"
+      ],
+      "utilities/*": [
+        "src/utilities/*"
+      ],
       "stores/*": [
         "src/stores/*"
       ],
