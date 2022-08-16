@@ -9,6 +9,7 @@ export default function client (serviceName = 'default') {
   const authStore = useAuthStore()
 
   const accessToken = authStore.apiToken
+  // TODO: handle isLocalErrorHandling like showNotification
   const isLocalErrorHandling = commonStore.isLocalErrorHandling
   const defaultCompany = authStore.defaultCompany
   let showNotification = true
@@ -43,7 +44,7 @@ export default function client (serviceName = 'default') {
   )
 
   function handleRequestSuccess (request) {
-    if (request.noNotification) showNotification = false
+    if (!request.showNotification) showNotification = false
     if (request.notifyOptions) notifyOptions = request.notifyOptions
     if (accessToken) {
       request = {
