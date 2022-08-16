@@ -38,6 +38,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 ## Points to be noted
 - Always keep Quasar version up-to-date.
 - Never use/import any `.env` variables in any file/code other than `consts.js`.
+- Never manipulate pinia state directly from any component.
 
 ## Directory structure
 ```bash
@@ -84,7 +85,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 ├── .eslintignore            # ESlint ignore paths
 ├── .eslintrc.js             # ESlint config
 ├── postcss.config.js        # PostCSS config
-├── jsconfig.json            # Editor config (if not using Typescript)
+├── jsconfig.json            # Editor config for javascript
 ├── package.json             # npm scripts and dependencies
 └── README.md                # readme for your website/App
 ```
@@ -115,3 +116,71 @@ To know more on env variables see [Env Variables and Modes](https://vitejs.dev/g
 TBD
 ### notify-defaults.js
 Default configurations of Quasar `Notify` plugin
+
+## Services
+Syntax:
+```
+functionName (arguments) {
+  return client([service]).method('API_URL', payload, options)
+}
+```
+Example:
+```
+login ({ data, service = undefined }) {
+  return client(service).post('login', data, { requiresAuth: false, notifyOptions: { message: 'Logged in successfully' } })
+}
+```
+- `data`: payload that needs to be passed to back-end
+- `service[optional][default=default]`: name of the BE service we want to use. If we want to pass the name from anywhere other than API definition, set default value to `undefined`.
+- `client`: API client wrapper.
+- `method`: axios request method.
+- `API_URL[String:any]`: API route/URL.
+- `options[optional]`: options to be passed in `client` wrapper.
+  - `requiresAuth`: API needs authentication or not.
+  - `notifyOptions`: Quasar Notify options.
+  - `showNotification[default: true]`: Show/hide API success notification.
+
+## Stores
+### common-store
+#### states:
+- `pageTitle`: PAGE TITLE can be used anywhere in the app.
+- `localErrorHandling`: Do we want to handle error from any component or, store other than from client's handler.
+- `headerAction[Node:any]`: Any component/node to show on page header.
+- `reRenderKey[Number:any]`: Key to be used for rerendering the whole app.
+- `loading`: POST/PUT api running state.
+- `fetching`: GET api running state.
+#### actions:
+- `setPageTitle`: set `pageTitle` state.
+- `setHeaderAction`: set `headerAction` state.
+- `reRenderComponent`: set `reRenderKey` state and entry element's `key` in app.vue. Don't use this in any of the Vue Life-Cycle-Hook. Otherwise it will create an endless loop. This method is costly. So, don't use it unless you really need to re-render your visual components.
+- `renderAlertDialog`: Use Quasar alert-dialog with some predefined configs.
+- `setLoading`: set `loading` state.
+- `setFetching`: set `fetching` state.
+
+## Utilities
+### methods.js
+Utility methods are defined here. Most of the methods are self-explanatory. However some of them need explanation how to use.
+#### convertObjCasing - how to use it?
+```
+import {convertObjCasing, convertSnakeToCamel} from 'utilities/methods'
+
+const camelCasedObject = convertObjCasing(objectToConvert, convertSnakeToCamel)
+```
+
+### validator.js
+Meant to (but not limited to) be used in Quasar input validations. Can be used in any methods where it suits.
+#### How to use validators?
+```
+<script setup>
+import { validateEmail } from 'utilities/validators'
+</script>
+
+<template>
+  <q-input
+    ...
+    :rules="[
+      val => validateEmail(val) || 'Type a valid Email'
+    ]"
+  >
+</template>
+```
