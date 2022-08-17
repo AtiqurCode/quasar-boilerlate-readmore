@@ -180,7 +180,7 @@ const camelCasedObject = convertObjCasing(objectToConvert, convertSnakeToCamel)
 ```
 
 ### validator.js
-Meant to (but not limited to) be used in Quasar input validations. Can be used in any methods where it suits.
+Meant to (but not limited to) be used in Quasar input validations. It can be used in any case where we want to test some certain validity. Validators will return Boolean.
 #### How to use validators?
 ```
 <script setup>
