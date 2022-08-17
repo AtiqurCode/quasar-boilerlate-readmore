@@ -7,7 +7,7 @@ import { routes as dashboard } from 'modules/dashboard'
 // import { routes as userAccess } from 'modules/userAccess'
 // import { routes as customer } from 'modules/customer'
 // import { routes as contacts } from 'modules/contacts'
-// import { routes as settings } from 'modules/settings'
+import { routes as settings } from 'modules/settings'
 
 const routes = [
   ...auth,
@@ -19,7 +19,7 @@ const routes = [
   // ...userAccess,
   // ...customer,
   // ...contacts,
-  // ...settings,
+  ...settings,
 
   // Always leave this as last one,
   // but you can also remove it
