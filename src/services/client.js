@@ -3,15 +3,17 @@ import { Notify } from 'quasar'
 import { API_URL, APP_ID } from 'src/consts'
 import { useCommonStore } from 'stores/common-store'
 import { useAuthStore } from 'stores/auth-store'
+import { useCompanyStore } from 'stores/company-store'
 
 export default function client (serviceName = 'default') {
   const commonStore = useCommonStore()
   const authStore = useAuthStore()
+  const companyStore = useCompanyStore()
 
   const accessToken = authStore.apiToken
   // TODO: handle isLocalErrorHandling like showNotification
   const isLocalErrorHandling = commonStore.isLocalErrorHandling
-  const defaultCompany = authStore.defaultCompany
+  const defaultCompany = companyStore.defaultCompany
   let showNotification = true
   let notifyOptions = false
 
