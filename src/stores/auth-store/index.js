@@ -5,7 +5,6 @@ import { STORAGE_KEY } from 'src/consts'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     userAuthInfo: {},
-    userProfile: {},
     permissions: []
   }),
   getters: {
@@ -15,6 +14,6 @@ export const useAuthStore = defineStore('auth', {
   actions,
   persist: {
     key: `${STORAGE_KEY}_auth`,
-    paths: ['userAuthInfo', 'userProfile', 'permissions']
+    paths: ['userAuthInfo', 'permissions']
   }
 })

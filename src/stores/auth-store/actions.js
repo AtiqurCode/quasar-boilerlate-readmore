@@ -1,8 +1,10 @@
 import Api from 'services/authService'
 import { useCommonStore } from 'stores/common-store'
 import { useCompanyStore } from 'stores/company-store'
+import { useUserStore } from 'stores/user-store'
 
 const companyStore = useCompanyStore()
+const userStore = useUserStore()
 
 export default {
   async logUserIn (payload) {
@@ -15,7 +17,7 @@ export default {
     } = await Api.login(payload)
 
     this.userAuthInfo = session
-    this.userProfile = userInfo
+    userStore.userProfile = userInfo
     companyStore.companies = companies
   },
 
