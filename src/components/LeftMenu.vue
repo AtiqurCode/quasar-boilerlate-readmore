@@ -54,7 +54,7 @@ const defaultCompanyImage = computed(() => {
   const {
     default_image_name: image
   } = props.companies.find(company => company.id === selectedCompany.value) || {}
-  return image ? `companies/${image}` : 'images/menu-banner.jpg'
+  return image ? `companies/${image}` : '/images/menu-banner.jpg'
 })
 
 const authStore = useAuthStore()
