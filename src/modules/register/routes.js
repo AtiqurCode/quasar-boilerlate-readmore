@@ -17,7 +17,7 @@ export default [
         component: () => import('./pages/EmailVerification.vue'),
         name: 'emailVerification',
         meta: {
-          noAuthRequired: true,
+          requiresAuth: false,
           title: 'Email Verification'
         }
       }
