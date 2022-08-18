@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-// import { renderBackButton } from 'src/mixins/backButtonMixin'
+import { useBackButton } from 'composables/backButton'
 import { backEndStorageURL } from 'utilities/methods'
 import { useUserStore } from 'stores/user-store'
 import { useCommonStore } from 'stores/common-store'
+
+useBackButton()
 
 const commonStore = useCommonStore()
 const userStore = useUserStore()
@@ -45,7 +47,7 @@ const handleSubmit = (val) => {
         >
           <q-img
             class="image"
-            placeholder-src="logo_icon.png"
+            placeholder-src="/icons/icon.png"
             spinner-color="white"
             :src="url || backEndStorageURL(userStore.userProfile.avatar)"
             style="height: 140px; max-width: 155px"
