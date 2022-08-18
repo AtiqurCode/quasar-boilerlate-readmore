@@ -5,6 +5,7 @@ import actions from './actions'
 export const useCommonStore = defineStore('common', {
   state: () => ({
     pageTitle: DEFAULT_PAGE_TITLE,
+    backButton: null,
     localErrorHandling: false,
     headerAction: null,
     reRenderKey: 1,

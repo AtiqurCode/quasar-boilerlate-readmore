@@ -5,6 +5,10 @@ export default {
     this.pageTitle = payload
   },
 
+  showBackButton (payload = null) {
+    this.backButton = payload
+  },
+
   setHeaderAction (payload) {
     this.headerAction = payload
   },
