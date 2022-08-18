@@ -114,7 +114,7 @@ const handleCompanySelection = (id) => {
         style="background: unset;"
       >
         <div>
-          <div class="row justify-between align-start">
+          <div class="row justify-between items-start">
             <q-avatar size="56px">
               <img :src="profileImage">
             </q-avatar>
@@ -123,6 +123,7 @@ const handleCompanySelection = (id) => {
               round
               dense
               icon="o_chevron_left"
+              style="margin-top: -8px;"
               @click="drawerOpened = false"
             />
           </div>
