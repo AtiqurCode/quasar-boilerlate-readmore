@@ -47,6 +47,8 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 ├── src/
 │   ├── assets/              # dynamic assets (processed by Vite)
 │   ├── components/          # .vue common components used in pages & layouts
+│   ├── composables/         # vue composables
+|   |   ├── backButton.js    # backButton composable for shwing back-button in layout header/toolbar
 │   ├── css/                 # CSS/Sass/... files for your app
 |   |   ├── app.sass
 |   │   └── quasar.variables.sass # Quasar Sass variables for you to tweak
@@ -90,7 +92,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 └── README.md                # readme for your website/App
 ```
 
-Directories can be accessed directly without relative paths: `app`, `src`, `assets`, `components`, `layouts`, `modules`, `pages`, `boot`, `services`, `stores`, `utilities`
+Directories can be accessed directly without relative paths: `app`, `src`, `assets`, `composables`, `components`, `layouts`, `modules`, `pages`, `boot`, `services`, `stores`, `utilities`
 <br />
 e.g. `import {something} from 'utilities/methods'`
 ## Env Variables
@@ -129,6 +131,21 @@ TBD
 ### notify-defaults.js
 Default configurations of Quasar `Notify` plugin
 
+## Composables
+### backButton.js
+It simply set back-button configs onMount hook and nullify onBeforeUnmount hook.
+```bash
+onMounted(() => commonStore.showBackButton({ show: true, routerParams })) # routerParams is vue-router params and can be String or Object.
+onBeforeUnmount(() => commonStore.showBackButton(null))
+```
+To use it just call `useBackButton` in .vue component's `setup` scope.
+```bash
+import { useBackButton } from 'composables/backButton'
+
+useBackButton() # or - will behave like default back routing
+useBackButton('/dashboard') # or
+useBackButton({name: 'dashboard', query, params})
+```
 ## Services
 Syntax:
 ```
@@ -156,6 +173,7 @@ login ({ data, service = undefined }) {
 ### common-store
 #### states:
 - `pageTitle`: PAGE TITLE can be used anywhere in the app.
+- `backButton`: Decides whether to show back button or not.
 - `localErrorHandling`: Do we want to handle error from any component or, store other than from client's handler.
 - `headerAction[Node:any]`: Any component/node to show on page header.
 - `reRenderKey[Number:any]`: Key to be used for rerendering the whole app.
@@ -163,6 +181,7 @@ login ({ data, service = undefined }) {
 - `fetching`: GET api running state.
 #### actions:
 - `setPageTitle`: set `pageTitle` state.
+- `showBackButton`: set `backButton` state. Payload example for showing back-button `{ show: true, routerParams }` and hiding it `null`.
 - `setHeaderAction`: set `headerAction` state.
 - `reRenderComponent`: set `reRenderKey` state and entry element's `key` in app.vue. Don't use this in any of the Vue Life-Cycle-Hook. Otherwise it will create an endless loop. This method is costly. So, don't use it unless you really need to re-render your visual components.
 - `renderAlertDialog`: Use Quasar alert-dialog with some predefined configs.
