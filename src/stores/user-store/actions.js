@@ -8,8 +8,8 @@ export default {
     } catch {}
   },
 
-  resetPassword (payload) {
-    Api.resetPassword(payload)
+  changePassword (payload) {
+    Api.changePassword(payload)
   },
 
   uploadImage (payload) {

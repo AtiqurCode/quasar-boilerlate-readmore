@@ -20,16 +20,16 @@ export default [
           requiresAuth: true,
           title: 'My Profile'
         }
+      },
+      {
+        path: 'security',
+        component: () => import('./pages/SecuritySettings.vue'),
+        name: 'securitySettings',
+        meta: {
+          noAuthRequired: false,
+          title: 'Change Password'
+        }
       }
-      // {
-      //   path: 'security',
-      //   component: () => import('./pages/SecuritySettings'),
-      //   name: 'Security-Settings',
-      //   meta: {
-      //     noAuthRequired: false,
-      //     title: 'Change Password'
-      //   }
-      // },
       // {
       //   path: 'theme',
       //   component: () => import('./pages/ThemeSettings'),

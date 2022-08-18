@@ -48,7 +48,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 │   ├── assets/              # dynamic assets (processed by Vite)
 │   ├── components/          # .vue common components used in pages & layouts
 │   ├── composables/         # vue composables
-|   |   ├── backButton.js    # backButton composable for shwing back-button in layout header/toolbar
+|   |   ├── backButton.js    # backButton composable for showing back-button in layout header/toolbar
 │   ├── css/                 # CSS/Sass/... files for your app
 |   |   ├── app.sass
 |   │   └── quasar.variables.sass # Quasar Sass variables for you to tweak
@@ -142,7 +142,7 @@ To use it just call `useBackButton` in .vue component's `setup` scope.
 ```bash
 import { useBackButton } from 'composables/backButton'
 
-useBackButton() # or - will behave like default back routing
+useBackButton() # will behave like default back routing. or
 useBackButton('/dashboard') # or
 useBackButton({name: 'dashboard', query, params})
 ```
