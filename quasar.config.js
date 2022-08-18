@@ -62,6 +62,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       alias: {
+        composables: path.join(__dirname, './src/composables'),
         modules: path.join(__dirname, './src/modules'),
         services: path.join(__dirname, './src/services'),
         utilities: path.join(__dirname, './src/utilities')
