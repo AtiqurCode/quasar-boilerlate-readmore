@@ -11,16 +11,16 @@ export default [
           requiresAuth: false,
           title: 'Login'
         }
+      },
+      {
+        path: 'recover-password',
+        component: () => import('./pages/RecoverPassword.vue'),
+        name: 'recoverPassword',
+        meta: {
+          requiresAuth: false,
+          title: 'Recover Password'
+        }
       }
-      //     {
-      //       path: 'password-request',
-      //       component: () => import('./pages/RecoverPassword.vue'),
-      //       name: 'recover-password',
-      //       meta: {
-      //         requiresAuth: false,
-      //         title: 'Recover Password'
-      //       }
-      //     },
       //     {
       //       path: 'confirmation',
       //       component: () => import('./pages/EmailConfirmation.vue'),

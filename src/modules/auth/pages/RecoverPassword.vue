@@ -1,88 +1,84 @@
+<script setup>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { validateEmail } from 'utilities/validators'
+import { useAuthStore } from 'stores/auth-store'
+import { useCommonStore } from 'stores/common-store'
+import CompanyBranding from 'components/CompanyBranding.vue'
+
+const form = reactive({
+  email: '',
+  last_name: ''
+})
+
+const commonStore = useCommonStore()
+const authStore = useAuthStore()
+const router = useRouter()
+const onSubmit = async () => {
+  try {
+    await authStore.forgotPassword(form)
+    router.push({ name: 'confirmation', params: { message: 'We have sent a verification code to your email address.' } })
+  } catch (error) {}
+}
+
+</script>
+
 <template>
-  <q-page padding>
+  <q-page
+    padding
+    class="row justify-center items-center"
+  >
     <q-card
-      style="max-width: 400px;"
-      class="q-mx-auto q-mt-lg"
-      square
+      style="width: 400px; max-width: 100%;"
+      class="text-center"
       flat
     >
-      <q-form
-        @submit="onSubmit"
-        class="q-gutter-md"
-      >
-        <q-card-section class="q-pt-lg">
-          <q-img
-            src="~assets/logo_full.png"
-            spinner-color="primary"
-            contain
-            style="max-height: 50px; max-width: 100%;"
-          />
-        </q-card-section>
+      <q-card-section>
+        <CompanyBranding class="q-mb-xl" />
+      </q-card-section>
+      <q-form @submit="onSubmit">
         <q-card-section>
           <q-input
-            v-model.trim="email"
+            v-model="form.email"
+            class="itc-input required"
+            stack-label
+            outlined
             label="Email"
             placeholder="login@example.com"
             type="email"
             autofocus
             clearable
+            clear-icon="close"
             :rules="[
-              val => !!val || 'Field is required',
+              val => !!val || 'Email is required',
               val => validateEmail(val) || 'Type a valid Email'
             ]"
           />
           <q-input
-            v-model.trim="lastName"
+            v-model.trim="form.last_name"
+            class="itc-input required"
+            stack-label
+            outlined
             label="Last Name"
             placeholder="Doe"
             clearable
-            :rules="[val => !!val || 'Field is required']"
+            clear-icon="close"
+            :rules="[val => !!val || 'Last Name is required']"
           />
         </q-card-section>
 
         <q-card-section class="q-pt-none">
           <q-btn
-            flat
-            dense
+            label="Recover"
             color="primary"
+            size="lg"
+            no-caps
+            class="full-width"
+            :loading="commonStore.loading"
             type="submit"
-          >
-            Recover
-          </q-btn>
+          />
         </q-card-section>
       </q-form>
     </q-card>
   </q-page>
 </template>
-
-<script>
-import { validateEmail } from 'src/validationServices'
-import { mapActions } from 'vuex'
-
-export default {
-  data () {
-    return {
-      email: '',
-      lastName: ''
-    }
-  },
-  methods: {
-    ...mapActions({
-      forgotPassword: 'auth/forgotPassword'
-    }),
-    validateEmail,
-    async onSubmit () {
-      const data = {
-        email: this.email,
-        last_name: this.lastName
-      }
-      try {
-        await this.forgotPassword(data)
-        this.$router.push({ name: 'confirmation', params: { message: 'We have sent a password reset link to your email address.' } })
-      } catch (error) {}
-    }
-  }
-}
-</script>
-
-<style></style>

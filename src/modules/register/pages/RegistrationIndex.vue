@@ -47,7 +47,7 @@
             placeholder="login@example.com"
             type="email"
             clearable
-            clear-icon="close"
+            clear-icon="o_close"
             :rules="[
               val => !!val || 'Email is required',
               val => validateEmail(val) || 'Type a valid Email'
@@ -95,7 +95,6 @@
             size="lg"
             no-caps
             class="full-width"
-            full
             :loading="commonStore.loading"
             type="submit"
           />

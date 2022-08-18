@@ -23,7 +23,7 @@
             type="email"
             autofocus
             clearable
-            clear-icon="close"
+            clear-icon="o_close"
             :rules="[
               val => !!val || 'Email is required',
               val => validateEmail(val) || 'Type a valid Email'
@@ -66,7 +66,6 @@
             size="lg"
             no-caps
             class="full-width"
-            full
             :loading="commonStore.loading"
             type="submit"
           />
@@ -82,7 +81,7 @@
           class="q-py-none"
           color="primary"
           label="Recover"
-          @click="router.push({name: 'recover-password'})"
+          @click="router.push({name: 'recoverPassword'})"
         />
       </q-card-section>
 

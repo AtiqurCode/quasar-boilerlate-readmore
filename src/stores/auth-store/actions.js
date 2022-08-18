@@ -39,7 +39,7 @@ export default {
     this.router.push({ name: 'login' })
   },
 
-  forgotPassword (userData) {
-    return Api.forgotPassword(userData)
+  forgotPassword (payload) {
+    return Api.forgotPassword(payload)
   }
 }
