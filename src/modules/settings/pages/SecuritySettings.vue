@@ -16,9 +16,9 @@ const oldPassword = ref(''),
 
 const handleChangePassword = () => {
   const data = {
-    password: oldPassword,
-    newpassword: password,
-    retypepassword: confirmPass
+    password: oldPassword.value,
+    newpassword: password.value,
+    retypepassword: confirmPass.value
   }
   userStore.changePassword(data)
 }
