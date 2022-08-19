@@ -17,7 +17,7 @@ const router = useRouter()
 const onSubmit = async () => {
   try {
     await authStore.forgotPassword(form)
-    router.push({ name: 'confirmation', params: { message: 'We have sent a verification code to your email address.' } })
+    router.push({ name: 'confirmation', query: { email: form.email } })
   } catch (error) {}
 }
 
@@ -76,6 +76,20 @@ const onSubmit = async () => {
             class="full-width"
             :loading="commonStore.loading"
             type="submit"
+          />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none text-caption">
+          Go back to
+          <q-btn
+            flat
+            dense
+            no-caps
+            size="0.75rem"
+            class="q-py-none"
+            color="primary"
+            label="Login"
+            @click="router.push({name: 'login'})"
           />
         </q-card-section>
       </q-form>
