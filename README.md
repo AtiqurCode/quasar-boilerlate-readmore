@@ -69,7 +69,8 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 |   |   ├── client.js        # API client(axios) initialization, default header, interceptor, default loading & notification configurations
 |   │   └── service1.js      # APIs
 │   ├── stores/              # Pinia Stores
-|   |   ├── index.js         # Pinia initialization
+|   |   ├── index.js
+|   │   ├── <plugins>        # Pinia plugins
 |   │   ├── <store>          # Pinia stores...
 |   │   └── <store>...
 │   ├── utilities/           # Holds various utilities
@@ -184,6 +185,7 @@ login ({ data, service = undefined }) {
 - `showBackButton`: set `backButton` state. Payload example for showing back-button `{ show: true, routerParams }` and hiding it `null`.
 - `setHeaderAction`: set `headerAction` state.
 - `reRenderComponent`: set `reRenderKey` state and entry element's `key` in app.vue. Don't use this in any of the Vue Life-Cycle-Hook. Otherwise it will create an endless loop. This method is costly. So, don't use it unless you really need to re-render your visual components.
+- `resetAllStores`: Reset all pinia stores.
 - `renderAlertDialog`: Use Quasar alert-dialog with some predefined configs.
 - `setLoading`: set `loading` state.
 - `setFetching`: set `fetching` state.
