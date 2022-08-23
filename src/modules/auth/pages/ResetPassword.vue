@@ -20,7 +20,8 @@ const commonStore = useCommonStore()
 const authStore = useAuthStore()
 const onSubmit = async () => {
   try {
-    await authStore.forgotPassword({ payload: { ...form, email: email.value }, notifyOptions: { message: 'Password reset successly' } })
+    const { data: { data } } = await authStore.forgotPassword({ ...form, email: email.value })
+    await authStore.changePassword({ id: data?.id, payload: { password: form.password } })
     router.push({ name: 'login' })
   } catch (error) {}
 }

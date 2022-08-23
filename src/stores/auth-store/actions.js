@@ -39,6 +39,10 @@ export default {
     return Api.forgotPassword(payload)
   },
 
+  changePassword (payload) {
+    return Api.changePassword(payload)
+  },
+
   reSendVerificationCode (payload) {
     // return Api.reSendVerificationCode(payload)
   }

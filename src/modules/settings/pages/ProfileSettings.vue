@@ -9,7 +9,7 @@ useBackButton()
 
 const commonStore = useCommonStore()
 const userStore = useUserStore()
-const { first_name: fName, last_name: lName } = userStore.userProfile
+const { first_name: fName, last_name: lName, id } = userStore.userProfile
 const firstName = ref(fName),
   lastName = ref(lName),
   readonly = ref(true),
@@ -18,7 +18,7 @@ const firstName = ref(fName),
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   url.value = URL.createObjectURL(file)
-  userStore.uploadImage({ id: userStore.userProfile.id, imageFile: file })
+  userStore.uploadImage({ id, imageFile: file })
 }
 
 const handleSubmit = (val) => {
@@ -26,9 +26,9 @@ const handleSubmit = (val) => {
     readonly.value = false
   } else {
     userStore.updateUserProfile({
-      id: this.userProfile.id,
-      first_name: this.firstName,
-      last_name: this.lastName
+      id,
+      first_name: firstName.value,
+      last_name: lastName.value
     })
   }
 }

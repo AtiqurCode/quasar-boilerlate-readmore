@@ -16,7 +16,7 @@ const authStore = useAuthStore()
 const router = useRouter()
 const onSubmit = async () => {
   try {
-    await authStore.forgotPassword({ payload: form })
+    await authStore.forgotPassword(form)
     router.push({ name: 'confirmation', query: { email: form.email } })
   } catch (error) {}
 }
