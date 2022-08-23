@@ -25,6 +25,12 @@ export default {
     this.reRenderKey = randomKey
   },
 
+  resetAllStores () {
+    this.stores.forEach(store => {
+      store.$reset()
+    })
+  },
+
   /*
   *** Error can be handled locally rather than the global scope
   *** by sending a Boolean parameter.
