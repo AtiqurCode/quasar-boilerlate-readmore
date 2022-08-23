@@ -43,9 +43,12 @@ const emit = defineEmits(['resendEmail'])
         </p>
         <b>{{ email || 'your email address.' }}</b>
         <p class="q-mt-md q-mb-none">
-          {{ instruction }} If you don't see it, you may need to <b>check your spam</b> folder.
+          <span v-html="instruction" /> If you don't find the email, you may need to check your <b>spam folder</b>.
         </p>
       </q-card-section>
+
+      <slot />
+
       <q-card-section
         v-if="resendEmailLabel"
         class="q-py-none text-caption"

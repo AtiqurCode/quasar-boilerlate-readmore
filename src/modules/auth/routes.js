@@ -34,10 +34,10 @@ export default [
       {
         path: 'reset-password',
         component: () => import('./pages/ResetPassword.vue'),
-        name: 'reset-password',
+        name: 'resetPassword',
         meta: {
           requiresAuth: false,
-          title: 'reset password'
+          title: 'Reset Password'
         }
       }
     ]

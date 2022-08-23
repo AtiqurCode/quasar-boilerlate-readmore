@@ -1,24 +1,26 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { reactive, ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from 'stores/auth-store'
 import { useCommonStore } from 'stores/common-store'
 import CompanyBranding from 'components/CompanyBranding.vue'
 
+const route = useRoute()
 const router = useRouter()
 
 const form = reactive({
   password: '',
   re_type_password: '',
-  verification_code: ''
+  recovery_code: ''
 })
 const isPwd = ref(true)
 
+const email = computed(() => route.query.email)
 const commonStore = useCommonStore()
 const authStore = useAuthStore()
 const onSubmit = async () => {
   try {
-    await authStore.forgotPassword(form)
+    await authStore.forgotPassword({ payload: { ...form, email: email.value }, notifyOptions: { message: 'Password reset successly' } })
     router.push({ name: 'login' })
   } catch (error) {}
 }
@@ -76,7 +78,7 @@ const onSubmit = async () => {
             ]"
           />
           <q-input
-            v-model="form.verification_code"
+            v-model="form.recovery_code"
             class="itc-input required"
             stack-label
             outlined
