@@ -46,14 +46,14 @@ export default function client (serviceName = 'default') {
   )
 
   function handleRequestSuccess (request) {
-    if (!request.showNotification) showNotification = false
+    if (request.showNotification === false) showNotification = false
     if (request.notifyOptions) notifyOptions = request.notifyOptions
-    if (accessToken) {
-      request = {
-        ...request,
-        url: `companies/${defaultCompany}/${request.url}`
-      }
-    }
+    // if (accessToken) {
+    //   request = {
+    //     ...request,
+    //     url: `companies/${defaultCompany}/${request.url}`
+    //   }
+    // }
     if (!accessToken && request.requiresAuth) {
       const CancelToken = axios.CancelToken
       return {
