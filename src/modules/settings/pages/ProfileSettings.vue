@@ -12,7 +12,6 @@ const userStore = useUserStore()
 const { first_name: fName, last_name: lName, id } = userStore.userProfile
 const firstName = ref(fName),
   lastName = ref(lName),
-  readonly = ref(true),
   url = ref('')
 
 const handleFileUpload = (event) => {
@@ -21,16 +20,12 @@ const handleFileUpload = (event) => {
   userStore.uploadImage({ id, imageFile: file })
 }
 
-const handleSubmit = (val) => {
-  if (readonly.value) {
-    readonly.value = false
-  } else {
-    userStore.updateUserProfile({
-      id,
-      first_name: firstName.value,
-      last_name: lastName.value
-    })
-  }
+const handleSubmit = () => {
+  userStore.updateUserProfile({
+    id,
+    first_name: firstName.value,
+    last_name: lastName.value
+  })
 }
 </script>
 
