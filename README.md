@@ -40,6 +40,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 - Never use/import any `.env` variables in any file/code other than `consts.js`.
 - Never manipulate pinia state directly from any component.
 - Always keep theme in mind. Never use any static color other than the colors available in the theme.
+- Don't forget to add `/` before any asset you use from public folder.
 
 ## Directory structure
 ```bash
@@ -112,6 +113,12 @@ e.g. `import {something} from 'utilities/methods'`
 
 To know more on env variables see [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html).
 
+
+## Theming
+### Brand colors
+Brand colors can be found under `src/css/quasar.variables.scss`. Feel free to change the color values to match your app branding. You can also add more brand colors if you need. Please follow the [Quasar doc link](https://quasar.dev/style/color-palette#adding-your-own-colors) to add your own brand colors.
+### Images
+Brand images are stored under `/public` folder. Replace the images with your own branding ones but keep the naming unchanged. Otherwise you will need to change the naming in the relevant components that use them.
 ## Assets
 ### navigation-links.js
 List of navigation links that are meant to be shown in drawer component.
