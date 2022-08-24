@@ -90,7 +90,7 @@
           Or sign in with
         </p>
         <q-btn
-          icon="img:/icons/google_G_logo.svg"
+          icon="img:/icons/social/google_G_logo.svg"
           color="white"
           align="center"
           size="lg"
@@ -102,7 +102,7 @@
           </q-tooltip>
         </q-btn>
         <q-btn
-          icon="img:/icons/facebook_f_logo.svg"
+          icon="img:/icons/social/facebook_f_logo.svg"
           color="white"
           align="center"
           size="lg"
@@ -114,7 +114,7 @@
           </q-tooltip>
         </q-btn>
         <q-btn
-          icon="img:/icons/apple_logo.svg"
+          icon="img:/icons/social/apple_logo.svg"
           color="white"
           align="center"
           size="lg"
@@ -126,7 +126,7 @@
           </q-tooltip>
         </q-btn>
         <q-btn
-          icon="img:/icons/microsoft_live_logo.svg"
+          icon="img:/icons/social/microsoft_live_logo.svg"
           color="white"
           align="center"
           size="lg"
