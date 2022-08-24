@@ -39,6 +39,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 - Always keep Quasar version up-to-date.
 - Never use/import any `.env` variables in any file/code other than `consts.js`.
 - Never manipulate pinia state directly from any component.
+- Always keep theme in mind. Never use any static color other than the colors available in the theme.
 
 ## Directory structure
 ```bash
@@ -117,10 +118,10 @@ List of navigation links that are meant to be shown in drawer component.
 #### How to add a new item?
 ```bash
 {
-    label: 'Dashboard',   # To be displayed as navigation label.
-    icon: 'o_home',       # [optional] If we want any icon to show at the start of the navigation item.
-    hash: '/dashboard'    # Absolute path of the navigation item.
-  }
+  label: 'Dashboard',   # To be displayed as navigation label.
+  icon: 'o_home',       # [optional] If we want any icon to show at the start of the navigation item.
+  hash: '/dashboard'    # Absolute path of the navigation item.
+}
 ```
 
 ## Boot files
