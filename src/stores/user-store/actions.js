@@ -3,7 +3,7 @@ import Api from 'services/userService'
 export default {
   async updateUserProfile (payload) {
     try {
-      const data = await Api.updateProfile(payload)
+      const { data: { data } } = await Api.updateProfile(payload)
       this.userProfile = data
     } catch {}
   },

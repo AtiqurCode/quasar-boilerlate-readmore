@@ -15,12 +15,7 @@ const oldPassword = ref(''),
   isPwd = ref(true)
 
 const handleChangePassword = () => {
-  const data = {
-    password: oldPassword.value,
-    newpassword: password.value,
-    retypepassword: confirmPass.value
-  }
-  userStore.changePassword(data)
+  userStore.changePassword({ id: userStore.userProfile?.id, payload: { password: password.value, old_password: oldPassword.value } })
 }
 
 </script>
