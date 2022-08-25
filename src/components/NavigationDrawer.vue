@@ -63,40 +63,6 @@ const defaultCompanyImage = computed(() => {
     :breakpoint="800"
     show-if-above
   >
-    <q-scroll-area style="height: calc(100% - 170px); margin-top: 170px; border-right: 1px solid #ddd">
-      <q-list padding>
-        <q-item
-          v-for="navLink in navLinks"
-          :key="navLink.id"
-          clickable
-          v-ripple
-          :to="navLink.hash"
-        >
-          <q-item-section avatar>
-            <q-icon :name="navLink.icon" />
-          </q-item-section>
-
-          <q-item-section>
-            {{ navLink.label }}
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          v-ripple
-          @click="emit('logout')"
-        >
-          <q-item-section avatar>
-            <q-icon name="power_settings_new" />
-          </q-item-section>
-
-          <q-item-section>
-            Logout
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-scroll-area>
-
     <q-img
       class="absolute-top"
       :src="defaultCompanyImage"
@@ -108,8 +74,11 @@ const defaultCompanyImage = computed(() => {
       >
         <div>
           <div class="row justify-between items-start">
-            <q-avatar size="56px">
-              <img :src="profileImage">
+            <q-avatar size="40px">
+              <img
+                :src="profileImage"
+                style="max-width: 100%; max-height: 100%; height: auto !important; width: auto !important;"
+              >
             </q-avatar>
             <q-btn
               flat
@@ -149,5 +118,39 @@ const defaultCompanyImage = computed(() => {
         />
       </div>
     </q-img>
+
+    <q-scroll-area style="height: calc(100% - 170px); margin-top: 170px; border-right: 1px solid #ddd">
+      <q-list padding>
+        <q-item
+          v-for="navLink in navLinks"
+          :key="navLink.id"
+          clickable
+          v-ripple
+          :to="navLink.hash"
+        >
+          <q-item-section avatar>
+            <q-icon :name="navLink.icon" />
+          </q-item-section>
+
+          <q-item-section>
+            {{ navLink.label }}
+          </q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+          v-ripple
+          @click="emit('logout')"
+        >
+          <q-item-section avatar>
+            <q-icon name="power_settings_new" />
+          </q-item-section>
+
+          <q-item-section>
+            Logout
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-scroll-area>
   </q-drawer>
 </template>
