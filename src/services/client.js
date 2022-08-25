@@ -13,7 +13,7 @@ export default function client (serviceName = 'default') {
   const accessToken = authStore.apiToken
   // TODO: handle isLocalErrorHandling like showNotification
   const isLocalErrorHandling = commonStore.isLocalErrorHandling
-  const defaultCompany = companyStore.defaultCompany
+  const currentCompany = companyStore.currentCompany
   let showNotification = true
   let notifyOptions = false
 
@@ -25,7 +25,7 @@ export default function client (serviceName = 'default') {
     options.headers = {
       Accept: 'application/json',
       'app-id': APP_ID,
-      'company-id': defaultCompany,
+      'company-id': currentCompany,
       'Access-Token': accessToken
     }
   } else {
@@ -51,7 +51,7 @@ export default function client (serviceName = 'default') {
     // if (accessToken) {
     //   request = {
     //     ...request,
-    //     url: `companies/${defaultCompany}/${request.url}`
+    //     url: `companies/${currentCompany}/${request.url}`
     //   }
     // }
     if (!accessToken && request.requiresAuth) {

@@ -22,12 +22,6 @@ export default {
     companyStore.companies = companies
   },
 
-  setDefaultCompany (payload) {
-    this.defaultCompany = payload
-
-    commonStore.reRenderComponent()
-  },
-
   async logOutUser () {
     // await Api.logout()
 

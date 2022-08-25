@@ -4,7 +4,8 @@ import { STORAGE_KEY } from 'src/consts'
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
-    companies: []
+    companies: [],
+    currentCompany: null
   }),
   getters: {
     defaultCompany: (state) => {
@@ -18,6 +19,6 @@ export const useCompanyStore = defineStore('company', {
   actions,
   persist: {
     key: `${STORAGE_KEY}_company`,
-    paths: ['companies']
+    paths: ['companies', 'currentCompany']
   }
 })

@@ -3,6 +3,8 @@ import { ref, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from 'stores/common-store'
 import { useAuthStore } from 'stores/auth-store'
+import { useUserStore } from 'stores/user-store'
+import { useCompanyStore } from 'stores/company-store'
 import { navLinks } from 'src/assets/navigation-links'
 
 const NavigationDrawer = defineAsyncComponent(() => import('components/NavigationDrawer.vue'))
@@ -10,6 +12,7 @@ const NavigationDrawer = defineAsyncComponent(() => import('components/Navigatio
 
 const drawer = ref(true)
 
+const userStore = useUserStore()
 const commonStore = useCommonStore()
 const router = useRouter()
 const handleBackRoute = () => {
@@ -20,8 +23,13 @@ const handleBackRoute = () => {
   }
 }
 
-const authStore = useAuthStore()
+const companyStore = useCompanyStore()
+companyStore.setCurrentCompany()
+const handleCompanySelection = (id) => {
+  companyStore.setCurrentCompany(id)
+}
 
+const authStore = useAuthStore()
 const handleLogout = () => {
   authStore.logOutUser()
 }
@@ -62,10 +70,11 @@ const handleLogout = () => {
     <NavigationDrawer
       v-model:drawer-state="drawer"
       :nav-links="navLinks"
-      :user-profile="authStore.userProfile"
-      :companies="authStore.companies"
-      :default-company="authStore.defaultCompany"
-      :logout="handleLogout"
+      :user-profile="userStore.userProfile"
+      :companies="companyStore.companies"
+      :default-company="companyStore.currentCompany"
+      @logout="handleLogout"
+      @select-company="handleCompanySelection"
     />
 
     <q-page-container>

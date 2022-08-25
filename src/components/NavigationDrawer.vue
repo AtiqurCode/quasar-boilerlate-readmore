@@ -1,18 +1,16 @@
 <script setup>
 import { computed } from 'vue'
 import { backEndStorageURL } from 'utilities/methods'
-import { useAuthStore } from 'stores/auth-store'
 
 const props = defineProps({
   drawerState: { type: Boolean, default: false },
   navLinks: { type: Array, required: true },
   userProfile: { type: Object, required: false, default: () => {} },
   companies: { type: Array, required: false, default: () => [] },
-  defaultCompany: { type: String, required: false, default: '' },
-  logout: { type: Function, default: () => { } }
+  defaultCompany: { type: String, required: false, default: '' }
 })
 
-const emit = defineEmits(['update:drawerState'])
+const emit = defineEmits(['update:drawerState', 'logout', 'selectCompany'])
 const drawerOpened = computed({
   get () {
     return props.drawerState
@@ -54,13 +52,8 @@ const defaultCompanyImage = computed(() => {
   const {
     default_image_name: image
   } = props.companies.find(company => company.id === selectedCompany.value) || {}
-  return image ? `companies/${image}` : '/images/menu-banner.jpg'
+  return image ? `/companies/${image}` : '/images/menu-banner.jpg'
 })
-
-const authStore = useAuthStore()
-const handleCompanySelection = (id) => {
-  authStore.setDefaultCompany(id)
-}
 </script>
 
 <template>
@@ -91,7 +84,7 @@ const handleCompanySelection = (id) => {
         <q-item
           clickable
           v-ripple
-          @click="logout"
+          @click="emit('logout')"
         >
           <q-item-section avatar>
             <q-icon name="power_settings_new" />
@@ -141,6 +134,7 @@ const handleCompanySelection = (id) => {
         </div>
 
         <q-select
+          v-if="props.companies?.length"
           dark
           color="white"
           borderless
@@ -151,7 +145,7 @@ const handleCompanySelection = (id) => {
           v-model="selectedCompany"
           map-options
           emit-value
-          @input="handleCompanySelection"
+          @input="id => emit('selectCompany', id)"
         />
       </div>
     </q-img>

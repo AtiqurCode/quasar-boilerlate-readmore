@@ -1,7 +1,18 @@
 // import Api from 'services/authService'
 import { useCommonStore } from 'stores/common-store'
 
+const commonStore = useCommonStore()
+
 export default {
+  setCurrentCompany (payload = null) {
+    if (payload) {
+      this.currentCompany = payload
+      commonStore.reRenderComponent()
+    } else {
+      this.currentCompany = this.defaultCompany
+    }
+  },
+
   setDefaultCompany (payload) {
     // TODO: need to change setdefaultcompany logic. api call is recommanded
 
@@ -20,7 +31,6 @@ export default {
       }
     })
 
-    const commonStore = useCommonStore()
-    commonStore.reRenderComponent()
+    this.setCurrentCompany(payload)
   }
 }
