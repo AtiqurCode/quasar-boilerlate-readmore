@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from 'stores/auth-store'
-import EmailConfirmation from 'components/EmailConfirmation.vue'
+
+const EmailConfirmation = defineAsyncComponent(() => import('components/EmailConfirmation.vue'))
 
 const authStore = useAuthStore()
 const route = useRoute()

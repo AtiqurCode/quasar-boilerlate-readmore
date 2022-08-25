@@ -1,9 +1,10 @@
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from 'stores/auth-store'
 import { useCommonStore } from 'stores/common-store'
-import CompanyBranding from 'components/CompanyBranding.vue'
+
+const CompanyBranding = defineAsyncComponent(() => import('components/CompanyBranding.vue'))
 
 const route = useRoute()
 const router = useRouter()

@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from 'stores/common-store'
 import { useAuthStore } from 'stores/auth-store'
 import { navLinks } from 'src/assets/navigation-links'
-import LeftMenu from 'src/components/LeftMenu.vue'
+
+const NavigationDrawer = defineAsyncComponent(() => import('components/NavigationDrawer.vue'))
 // const SelectLanguage = defineAsyncComponent(() => import('components/SelectLanguage'))
 
 const drawer = ref(true)
@@ -58,7 +59,7 @@ const handleLogout = () => {
       </q-toolbar>
     </q-header>
 
-    <LeftMenu
+    <NavigationDrawer
       v-model:drawer-state="drawer"
       :nav-links="navLinks"
       :user-profile="authStore.userProfile"

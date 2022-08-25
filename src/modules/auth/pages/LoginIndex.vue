@@ -1,3 +1,30 @@
+<script setup>
+import { ref, defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from 'stores/auth-store'
+import { useCommonStore } from 'stores/common-store'
+import { validateEmail } from 'utilities/validators'
+
+const CompanyBranding = defineAsyncComponent(() => import('components/CompanyBranding.vue'))
+
+const email = ref('')
+const password = ref('')
+const isPwd = ref(true)
+
+const commonStore = useCommonStore()
+const authStore = useAuthStore()
+const router = useRouter()
+
+const handleLogin = async () => {
+  try {
+    await authStore.logUserIn({ data: { email: email.value, password: password.value } })
+    router.push({ name: 'dashboard' })
+  } catch {}
+}
+
+const socialLogin = (provider) => { }
+</script>
+
 <template>
   <q-page
     padding
@@ -155,32 +182,6 @@
     </q-card>
   </q-page>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from 'stores/auth-store'
-import { useCommonStore } from 'stores/common-store'
-import { validateEmail } from 'utilities/validators'
-import CompanyBranding from 'components/CompanyBranding.vue'
-
-const email = ref('')
-const password = ref('')
-const isPwd = ref(true)
-
-const commonStore = useCommonStore()
-const authStore = useAuthStore()
-const router = useRouter()
-
-const handleLogin = async () => {
-  try {
-    await authStore.logUserIn({ data: { email: email.value, password: password.value } })
-    router.push({ name: 'dashboard' })
-  } catch {}
-}
-
-const socialLogin = (provider) => { }
-</script>
 
 <style scoped>
   .neumorphic::before {

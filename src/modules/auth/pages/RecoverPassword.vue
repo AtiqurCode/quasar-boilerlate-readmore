@@ -1,10 +1,11 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { validateEmail } from 'utilities/validators'
 import { useAuthStore } from 'stores/auth-store'
 import { useCommonStore } from 'stores/common-store'
-import CompanyBranding from 'components/CompanyBranding.vue'
+
+const CompanyBranding = defineAsyncComponent(() => import('components/CompanyBranding.vue'))
 
 const form = reactive({
   email: '',

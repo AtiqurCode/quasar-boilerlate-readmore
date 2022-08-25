@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCommonStore } from 'stores/common-store'
-import CompanyBranding from 'components/CompanyBranding.vue'
+
+const CompanyBranding = defineAsyncComponent(() => import('components/CompanyBranding.vue'))
 
 const commonStore = useCommonStore()
 const route = useRoute()

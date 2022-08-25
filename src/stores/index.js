@@ -1,7 +1,7 @@
 import { store } from 'quasar/wrappers'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import getAllPiniaStores from './plugins/getAllPiniaStores'
+import getAllPiniaStores from './plugins/get-all-pinia-stores'
 
 /*
  * If not building with SSR mode, you can
