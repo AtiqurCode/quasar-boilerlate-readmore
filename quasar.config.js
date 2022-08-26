@@ -31,6 +31,7 @@ module.exports = configure(function (/* ctx */) {
     boot: [
       'i18n',
       'auth',
+      'register-components',
       'notify-defaults'
     ],
 

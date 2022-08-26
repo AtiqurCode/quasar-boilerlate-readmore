@@ -53,6 +53,7 @@ const handlerInterceptor = (handler, warning) => {
     >
       <q-list
         separator
+        dense
         style="min-width: 100px"
       >
         <template v-for="({show = true, label, handler, warning = {}}, index) in menus">
