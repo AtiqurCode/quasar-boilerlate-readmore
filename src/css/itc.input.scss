@@ -35,7 +35,7 @@
   .itc-input {
     &.q-field.q-field--outlined {
       &.q-field--float .q-field__label {
-        background: var(--q-dark-page);
+        background: $dark-page;
       }
     }
   }

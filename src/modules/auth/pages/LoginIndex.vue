@@ -1,6 +1,7 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
 import { useAuthStore } from 'stores/auth-store'
 import { useCommonStore } from 'stores/common-store'
 import { validateEmail } from 'utilities/validators'
@@ -14,6 +15,12 @@ const isPwd = ref(true)
 const commonStore = useCommonStore()
 const authStore = useAuthStore()
 const router = useRouter()
+
+const $q = useQuasar()
+const isDrak = ref($q.dark.isActive)
+watch(() => $q.dark.isActive, val => {
+  isDrak.value = val
+})
 
 const handleLogin = async () => {
   try {
@@ -118,7 +125,6 @@ const socialLogin = (provider) => { }
         </p>
         <q-btn
           icon="img:/icons/social/google_G_logo.svg"
-          color="white"
           align="center"
           size="lg"
           class="q-pa-md neumorphic"
@@ -130,7 +136,6 @@ const socialLogin = (provider) => { }
         </q-btn>
         <q-btn
           icon="img:/icons/social/facebook_f_logo.svg"
-          color="white"
           align="center"
           size="lg"
           class="q-pa-md neumorphic"
@@ -141,8 +146,7 @@ const socialLogin = (provider) => { }
           </q-tooltip>
         </q-btn>
         <q-btn
-          icon="img:/icons/social/apple_logo.svg"
-          color="white"
+          :icon="isDrak ? 'img:/icons/social/apple_logo_light.svg' : 'img:/icons/social/apple_logo.svg'"
           align="center"
           size="lg"
           class="q-pa-md neumorphic"
@@ -154,7 +158,6 @@ const socialLogin = (provider) => { }
         </q-btn>
         <q-btn
           icon="img:/icons/social/microsoft_live_logo.svg"
-          color="white"
           align="center"
           size="lg"
           class="q-pa-md neumorphic"
@@ -183,9 +186,15 @@ const socialLogin = (provider) => { }
   </q-page>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
   .neumorphic::before {
-    background: linear-gradient(145deg, #e6e6e6, #ffffff);
-    box-shadow:  22px 22px 44px #d9d9d9, -22px -22px 44px #ffffff;
+    background: linear-gradient(145deg, $light, #ffffff);
+    box-shadow:  22px 22px 44px $light, -22px -22px 44px #ffffff;
+  }
+  .body--dark {
+    .neumorphic::before {
+      background: linear-gradient(145deg, $dark, $dark-page);
+      box-shadow:  22px 22px 44px $dark, -22px -22px 44px $dark-page;
+    }
   }
 </style>
