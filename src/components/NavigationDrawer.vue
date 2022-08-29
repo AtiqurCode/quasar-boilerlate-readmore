@@ -11,14 +11,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:drawerState', 'logout', 'selectCompany'])
-const drawerOpened = computed({
-  get () {
-    return props.drawerState
-  },
-  set (val) {
-    emit('update:drawerState', val)
-  }
-})
 
 const fullName = computed(() => {
   try {
@@ -58,7 +50,8 @@ const defaultCompanyImage = computed(() => {
 
 <template>
   <q-drawer
-    v-model="drawerOpened"
+    :model-value="drawerState"
+    @update:model-value="emit('update:drawerState', !drawerState)"
     :width="250"
     :breakpoint="800"
     show-if-above
@@ -86,7 +79,7 @@ const defaultCompanyImage = computed(() => {
               dense
               icon="o_chevron_left"
               style="margin-top: -8px;"
-              @click="drawerOpened = false"
+              @click="emit('update:drawerState', false)"
             />
           </div>
           <div class="block q-pt-sm vertical-middle">
