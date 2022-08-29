@@ -1,8 +1,6 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { ref } from 'vue'
 import { useCommonStore } from 'stores/common-store'
-
-const LightBox = defineAsyncComponent(() => import('./LightBox.vue'))
 
 const props = defineProps({
   label: { type: String, default: 'Upload media' },
