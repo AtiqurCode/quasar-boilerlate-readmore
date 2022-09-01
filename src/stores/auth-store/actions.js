@@ -3,6 +3,7 @@ import { useCommonStore } from 'stores/common-store'
 import { useCompanyStore } from 'stores/company-store'
 import { useUserStore } from 'stores/user-store'
 
+const commonStore = useCommonStore()
 const companyStore = useCompanyStore()
 const userStore = useUserStore()
 
@@ -21,25 +22,22 @@ export default {
     companyStore.companies = companies
   },
 
-  setDefaultCompany (payload) {
-    this.defaultCompany = payload
-
-    const commonStore = useCommonStore()
-    commonStore.reRenderComponent()
-  },
-
   async logOutUser () {
-    await Api.logout()
+    // await Api.logout()
 
-    const commonStore = useCommonStore()
-    commonStore.reRenderComponent()
-    // TODO: Reset all stores
-    commonStore.$reset()
-    this.$reset()
+    commonStore.resetAllStores()
     this.router.push({ name: 'login' })
   },
 
-  forgotPassword (userData) {
-    return Api.forgotPassword(userData)
+  forgotPassword (payload) {
+    return Api.forgotPassword(payload)
+  },
+
+  changePassword (payload) {
+    return Api.changePassword(payload)
+  },
+
+  reSendVerificationCode (payload) {
+    // return Api.reSendVerificationCode(payload)
   }
 }

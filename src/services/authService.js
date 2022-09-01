@@ -27,6 +27,9 @@ export default {
     return client().delete('logout', { requiresAuth: false, notifyOptions: { message: 'User logged out successfully' } })
   },
   forgotPassword (payload) {
-    return client().post('forgotpassword', payload, { requiresAuth: false, noNotification: true })
+    return client().post('forgotpassword', payload, { requiresAuth: false, showNotification: false })
+  },
+  changePassword ({ payload, id }) {
+    return client().post(`change/password/${id}`, payload, { requiresAuth: false, notifyOptions: { message: 'Password changed successfully' } })
   }
 }

@@ -13,7 +13,7 @@ export default function client (serviceName = 'default') {
   const accessToken = authStore.apiToken
   // TODO: handle isLocalErrorHandling like showNotification
   const isLocalErrorHandling = commonStore.isLocalErrorHandling
-  const defaultCompany = companyStore.defaultCompany
+  const currentCompany = companyStore.currentCompany
   let showNotification = true
   let notifyOptions = false
 
@@ -25,7 +25,7 @@ export default function client (serviceName = 'default') {
     options.headers = {
       Accept: 'application/json',
       'app-id': APP_ID,
-      'company-id': defaultCompany,
+      'company-id': currentCompany,
       'Access-Token': accessToken
     }
   } else {
@@ -46,14 +46,14 @@ export default function client (serviceName = 'default') {
   )
 
   function handleRequestSuccess (request) {
-    if (!request.showNotification) showNotification = false
+    if (request.showNotification === false) showNotification = false
     if (request.notifyOptions) notifyOptions = request.notifyOptions
-    if (accessToken) {
-      request = {
-        ...request,
-        url: `companies/${defaultCompany}/${request.url}`
-      }
-    }
+    // if (accessToken) {
+    //   request = {
+    //     ...request,
+    //     url: `companies/${currentCompany}/${request.url}`
+    //   }
+    // }
     if (!accessToken && request.requiresAuth) {
       const CancelToken = axios.CancelToken
       return {

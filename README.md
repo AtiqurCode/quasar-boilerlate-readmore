@@ -39,6 +39,8 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 - Always keep Quasar version up-to-date.
 - Never use/import any `.env` variables in any file/code other than `consts.js`.
 - Never manipulate pinia state directly from any component.
+- Always keep theme in mind. Never use any static color other than the colors available in the theme.
+- Don't forget to add `/` before any asset you use from public folder.
 
 ## Directory structure
 ```bash
@@ -47,6 +49,8 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 ├── src/
 │   ├── assets/              # dynamic assets (processed by Vite)
 │   ├── components/          # .vue common components used in pages & layouts
+│   ├── composables/         # vue composables
+|   |   ├── backButton.js    # backButton composable for showing back-button in layout header/toolbar
 │   ├── css/                 # CSS/Sass/... files for your app
 |   |   ├── app.sass
 |   │   └── quasar.variables.sass # Quasar Sass variables for you to tweak
@@ -67,7 +71,8 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 |   |   ├── client.js        # API client(axios) initialization, default header, interceptor, default loading & notification configurations
 |   │   └── service1.js      # APIs
 │   ├── stores/              # Pinia Stores
-|   |   ├── index.js         # Pinia initialization
+|   |   ├── index.js
+|   │   ├── <plugins>        # Pinia plugins
 |   │   ├── <store>          # Pinia stores...
 |   │   └── <store>...
 │   ├── utilities/           # Holds various utilities
@@ -90,7 +95,7 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 └── README.md                # readme for your website/App
 ```
 
-Directories can be accessed directly without relative paths: `app`, `src`, `assets`, `components`, `layouts`, `modules`, `pages`, `boot`, `services`, `stores`, `utilities`
+Directories can be accessed directly without relative paths: `app`, `src`, `assets`, `composables`, `components`, `layouts`, `modules`, `pages`, `boot`, `services`, `stores`, `utilities`
 <br />
 e.g. `import {something} from 'utilities/methods'`
 ## Env Variables
@@ -108,16 +113,22 @@ e.g. `import {something} from 'utilities/methods'`
 
 To know more on env variables see [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html).
 
+
+## Theming
+### Brand colors
+Brand colors can be found under `src/css/quasar.variables.scss`. Feel free to change the color values to match your app branding. You can also add more brand colors if you need. Please follow the [Quasar doc link](https://quasar.dev/style/color-palette#adding-your-own-colors) to add your own brand colors.
+### Images
+Brand images are stored under `/public` folder. Replace the images with your own branding ones but keep the naming unchanged. Otherwise you will need to change the naming in the relevant components that use them.
 ## Assets
 ### navigation-links.js
 List of navigation links that are meant to be shown in drawer component.
 #### How to add a new item?
 ```bash
 {
-    label: 'Dashboard',   # To be displayed as navigation label.
-    icon: 'o_home',       # [optional] If we want any icon to show at the start of the navigation item.
-    hash: '/dashboard'    # Absolute path of the navigation item.
-  }
+  label: 'Dashboard',   # To be displayed as navigation label.
+  icon: 'o_home',       # [optional] If we want any icon to show at the start of the navigation item.
+  hash: '/dashboard'    # Absolute path of the navigation item.
+}
 ```
 
 ## Boot files
@@ -129,6 +140,21 @@ TBD
 ### notify-defaults.js
 Default configurations of Quasar `Notify` plugin
 
+## Composables
+### backButton.js
+It simply set back-button configs onMount hook and nullify onBeforeUnmount hook.
+```bash
+onMounted(() => commonStore.showBackButton({ show: true, routerParams })) # routerParams is vue-router params and can be String or Object.
+onBeforeUnmount(() => commonStore.showBackButton(null))
+```
+To use it just call `useBackButton` in .vue component's `setup` scope.
+```bash
+import { useBackButton } from 'composables/backButton'
+
+useBackButton() # will behave like default back routing. or
+useBackButton('/dashboard') # or
+useBackButton({name: 'dashboard', query, params})
+```
 ## Services
 Syntax:
 ```
@@ -156,6 +182,7 @@ login ({ data, service = undefined }) {
 ### common-store
 #### states:
 - `pageTitle`: PAGE TITLE can be used anywhere in the app.
+- `backButton`: Decides whether to show back button or not.
 - `localErrorHandling`: Do we want to handle error from any component or, store other than from client's handler.
 - `headerAction[Node:any]`: Any component/node to show on page header.
 - `reRenderKey[Number:any]`: Key to be used for rerendering the whole app.
@@ -163,8 +190,10 @@ login ({ data, service = undefined }) {
 - `fetching`: GET api running state.
 #### actions:
 - `setPageTitle`: set `pageTitle` state.
+- `showBackButton`: set `backButton` state. Payload example for showing back-button `{ show: true, routerParams }` and hiding it `null`.
 - `setHeaderAction`: set `headerAction` state.
 - `reRenderComponent`: set `reRenderKey` state and entry element's `key` in app.vue. Don't use this in any of the Vue Life-Cycle-Hook. Otherwise it will create an endless loop. This method is costly. So, don't use it unless you really need to re-render your visual components.
+- `resetAllStores`: Reset all pinia stores.
 - `renderAlertDialog`: Use Quasar alert-dialog with some predefined configs.
 - `setLoading`: set `loading` state.
 - `setFetching`: set `fetching` state.

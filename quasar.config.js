@@ -31,12 +31,14 @@ module.exports = configure(function (/* ctx */) {
     boot: [
       'i18n',
       'auth',
+      'register-components',
       'notify-defaults'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
-      'app.scss'
+      'app.scss',
+      'itc.input.scss'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -62,6 +64,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       alias: {
+        composables: path.join(__dirname, './src/composables'),
         modules: path.join(__dirname, './src/modules'),
         services: path.join(__dirname, './src/services'),
         utilities: path.join(__dirname, './src/utilities')

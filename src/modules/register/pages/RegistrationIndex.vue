@@ -1,3 +1,34 @@
+<script setup>
+import { reactive, ref, defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router'
+import { useRegisterStore } from 'stores/register-store'
+import { useCommonStore } from 'stores/common-store'
+import { validateEmail } from 'utilities/validators'
+import { APP_ID } from 'src/consts'
+
+const CompanyBranding = defineAsyncComponent(() => import('components/CompanyBranding.vue'))
+
+const form = reactive({
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: ''
+})
+const confirmPass = ref(''),
+  isPwd = ref(true)
+
+const commonStore = useCommonStore()
+const registerStore = useRegisterStore()
+const router = useRouter()
+
+const handleRegistration = async () => {
+  try {
+    await registerStore.registerUser({ ...form, client_app_id: APP_ID })
+    router.push({ name: 'emailVerification', query: { email: form.email } })
+  } catch {}
+}
+</script>
+
 <template>
   <q-page
     padding
@@ -47,7 +78,7 @@
             placeholder="login@example.com"
             type="email"
             clearable
-            clear-icon="close"
+            clear-icon="o_close"
             :rules="[
               val => !!val || 'Email is required',
               val => validateEmail(val) || 'Type a valid Email'
@@ -95,7 +126,6 @@
             size="lg"
             no-caps
             class="full-width"
-            full
             :loading="commonStore.loading"
             type="submit"
           />
@@ -118,33 +148,3 @@
     </q-card>
   </q-page>
 </template>
-
-<script setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useRegisterStore } from 'stores/register-store'
-import { useCommonStore } from 'stores/common-store'
-import { validateEmail } from 'utilities/validators'
-import { APP_ID } from 'src/consts'
-import CompanyBranding from 'src/components/CompanyBranding.vue'
-
-const form = reactive({
-  first_name: '',
-  last_name: '',
-  email: '',
-  password: ''
-})
-const confirmPass = ref(''),
-  isPwd = ref(true)
-
-const commonStore = useCommonStore()
-const registerStore = useRegisterStore()
-const router = useRouter()
-
-const handleRegistration = async () => {
-  try {
-    await registerStore.registerUser({ ...form, client_app_id: APP_ID })
-    router.push({ name: 'emailVerification', query: { email: form.email } })
-  } catch {}
-}
-</script>

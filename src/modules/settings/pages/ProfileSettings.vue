@@ -1,34 +1,31 @@
 <script setup>
 import { ref } from 'vue'
-// import { renderBackButton } from 'src/mixins/backButtonMixin'
+import { useBackButton } from 'composables/backButton'
 import { backEndStorageURL } from 'utilities/methods'
 import { useUserStore } from 'stores/user-store'
 import { useCommonStore } from 'stores/common-store'
 
+useBackButton()
+
 const commonStore = useCommonStore()
 const userStore = useUserStore()
-const { first_name: fName, last_name: lName } = userStore.userProfile
+const { first_name: fName, last_name: lName, id } = userStore.userProfile
 const firstName = ref(fName),
   lastName = ref(lName),
-  readonly = ref(true),
   url = ref('')
 
 const handleFileUpload = (event) => {
   const file = event.target.files[0]
   url.value = URL.createObjectURL(file)
-  userStore.uploadImage({ id: userStore.userProfile.id, imageFile: file })
+  userStore.uploadImage({ id, imageFile: file })
 }
 
-const handleSubmit = (val) => {
-  if (readonly.value) {
-    readonly.value = false
-  } else {
-    userStore.updateUserProfile({
-      id: this.userProfile.id,
-      first_name: this.firstName,
-      last_name: this.lastName
-    })
-  }
+const handleSubmit = () => {
+  userStore.updateUserProfile({
+    id,
+    first_name: firstName.value,
+    last_name: lastName.value
+  })
 }
 </script>
 
@@ -45,7 +42,7 @@ const handleSubmit = (val) => {
         >
           <q-img
             class="image"
-            placeholder-src="logo_icon.png"
+            placeholder-src="/icons/icon.png"
             spinner-color="white"
             :src="url || backEndStorageURL(userStore.userProfile.avatar)"
             style="height: 140px; max-width: 155px"

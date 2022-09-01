@@ -5,6 +5,10 @@ export default {
     this.pageTitle = payload
   },
 
+  showBackButton (payload = null) {
+    this.backButton = payload
+  },
+
   setHeaderAction (payload) {
     this.headerAction = payload
   },
@@ -19,6 +23,12 @@ export default {
   reRenderComponent () {
     const randomKey = Math.random()
     this.reRenderKey = randomKey
+  },
+
+  resetAllStores () {
+    this.stores.forEach(store => {
+      store.$reset()
+    })
   },
 
   /*
