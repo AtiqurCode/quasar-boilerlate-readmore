@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import { useQuasar } from 'quasar'
+import { laFileCsvSolid, laFilePdf, laFileAlt, laFilePowerpoint, laFileArchive, laFileAudio, laFileWord, laFileExcel, laFileVideo, laFileCode } from '@quasar/extras/line-awesome'
 import { useCommonStore } from 'stores/common-store'
 
 const props = defineProps({
@@ -8,8 +10,12 @@ const props = defineProps({
   apiEndPoint: { type: String, required: true },
   attachmentGroup: { type: String, default: '' },
   fieldName: { type: String, default: 'file' },
-  files: { type: Array, default: () => [] }
+  files: { type: Array, default: () => [] },
+  flexibleHeight: { type: Boolean, default: false }
 })
+
+const $q = useQuasar()
+const isMobile = $q.platform.is.mobile
 
 const isOpenLightBox = ref(false),
   lightBoxHeader = ref(''),
@@ -88,12 +94,14 @@ const getFileExtension = (name) => {
 const getFileIconName = (file) => {
   const extension = getFileExtension(file)
   /* eslint-disable eqeqeq */
-  if (['txt', 'ini'].some(ext => ext == extension)) return 'alt'
-  if (['ppt', 'pptm', 'pptx'].some(ext => ext == extension)) return 'powerpoint'
-  if (['zip', 'rar', '7z', 'tar'].some(ext => ext == extension)) return 'archive'
-  if (['mp3', 'wav', 'aac', 'wma', 'aiff', 'flac'].some(ext => ext == extension)) return 'audio'
-  if (['docx', 'docm', 'doc', 'dotm', 'dotx', 'wbk'].some(ext => ext == extension)) return 'word'
-  if (['xltm', 'xltx', 'xlsm', 'xlsx', 'ooxml', 'xlm', 'xlt', 'xlt', 'xls'].some(ext => ext == extension)) return 'excel'
+  if (['csv'].some(ext => ext == extension)) return laFileCsvSolid
+  if (['pdf'].some(ext => ext == extension)) return laFilePdf
+  if (['txt', 'ini'].some(ext => ext == extension)) return laFileAlt
+  if (['ppt', 'pptm', 'pptx'].some(ext => ext == extension)) return laFilePowerpoint
+  if (['zip', 'rar', '7z', 'tar'].some(ext => ext == extension)) return laFileArchive
+  if (['mp3', 'wav', 'aac', 'wma', 'aiff', 'flac'].some(ext => ext == extension)) return laFileAudio
+  if (['docx', 'docm', 'doc', 'dotm', 'dotx', 'wbk'].some(ext => ext == extension)) return laFileWord
+  if (['xltm', 'xltx', 'xlsm', 'xlsx', 'ooxml', 'xlm', 'xlt', 'xlt', 'xls'].some(ext => ext == extension)) return laFileExcel
   if ([
     'mp4',
     'mpeg4',
@@ -107,7 +115,7 @@ const getFileIconName = (file) => {
     'avchd',
     '3gp',
     '3gpp'
-  ].some(ext => ext == extension)) return 'video'
+  ].some(ext => ext == extension)) return laFileVideo
   if ([
     'asp',
     'aspx',
@@ -134,6 +142,7 @@ const getFileIconName = (file) => {
     'do',
     'action',
     'js',
+    'json',
     'pl',
     'php',
     'php4',
@@ -144,9 +153,9 @@ const getFileIconName = (file) => {
     'dll',
     'bat',
     'dat'
-  ].some(ext => ext == extension)) return 'code'
+  ].some(ext => ext == extension)) return laFileCode
   /* eslint-enable eqeqeq */
-  return extension
+  return laFileAlt
 }
 </script>
 
@@ -156,7 +165,7 @@ const getFileIconName = (file) => {
     :label="label"
     :factory="factoryFn"
     auto-upload
-    style="width: 100%"
+    :style="{width: '100%', maxHeight: props.flexibleHeight && 'unset'}"
     v-bind="meta"
     @uploaded="handleUploaded"
   >
@@ -204,7 +213,7 @@ const getFileIconName = (file) => {
         <q-card
           v-for="file in files"
           :key="file.id"
-          style="width: 150px"
+          :style="{width: isMobile ? '90px' : '150px'}"
         >
           <q-card-actions
             class="absolute-top q-py-none"
@@ -231,20 +240,18 @@ const getFileIconName = (file) => {
             v-if="isImage(file.mime_type)"
             :src="file.full_url"
             spinner-color="white"
-            style="height: 140px; max-width: 150px; cursor: pointer;"
+            fit="cover"
+            :style="{height: isMobile ? '80px' : '140px', maxWidth: '100%', cursor: 'pointer'}"
             @click="openLightBox(file)"
           />
           <q-icon
             v-else
-            size="120px"
-            :name="'fas fa-file-' + getFileIconName(file.file_name)"
+            :size="isMobile ? '60px' : '120px'"
+            :name="getFileIconName(file.file_name)"
             color="grey"
             style="display: block; margin: 0 auto; padding: 10px 0;"
           />
-          <q-card-section
-            class="q-pa-sm"
-            :class="'bg-light-green-2'"
-          >
+          <q-card-section :class="['bg-light-green-2', isMobile ? 'q-pa-xs' : 'q-pa-sm']">
             <div
               class="text-subtitle2 ellipsis"
               :title="file.file_name"
@@ -252,10 +259,10 @@ const getFileIconName = (file) => {
               {{ file.file_name }}
             </div>
             <div class="text-caption">
-              Status: Uploaded
+              {{ isMobile ? '' : 'Status:' }} Uploaded
             </div>
             <div class="text-caption">
-              Size: {{ file.size_human_readable }}
+              {{ isMobile ? '' : 'Size:' }} {{ file.size_human_readable }}
             </div>
           </q-card-section>
         </q-card>
@@ -263,7 +270,7 @@ const getFileIconName = (file) => {
         <q-card
           v-for="file in scope.files"
           :key="file.name"
-          style="width: 150px"
+          :style="{width: isMobile ? '90px' : '150px'}"
         >
           <q-card-actions
             class="absolute-top q-py-none"
@@ -283,19 +290,17 @@ const getFileIconName = (file) => {
             v-if="file.__img"
             :src="file.__img.src"
             spinner-color="white"
-            style="height: 140px; max-width: 100%"
+            fit="cover"
+            :style="{height: isMobile ? '80px' : '140px', maxWidth: '100%'}"
           />
           <q-icon
             v-else
-            size="120px"
-            :name="'fas fa-file-' + getFileIconName(file.name)"
+            :size="isMobile ? '60px' : '120px'"
+            :name="getFileIconName(file.name)"
             color="grey"
             style="display: block; margin: 0 auto; padding: 10px 0;"
           />
-          <q-card-section
-            class="q-pa-sm"
-            :class="{'bg-red-2' : file.__status === 'failed'}"
-          >
+          <q-card-section :class="[{'bg-red-2' : file.__status === 'failed'}, isMobile ? 'q-pa-xs' : 'q-pa-sm']">
             <div
               class="text-subtitle2 ellipsis"
               :title="file.name"
@@ -303,10 +308,10 @@ const getFileIconName = (file) => {
               {{ file.name }}
             </div>
             <div class="text-caption">
-              Status: {{ file.__status }}
+              {{ isMobile ? '' : 'Status:' }} {{ file.__status }}
             </div>
             <div class="text-caption">
-              {{ file.__sizeLabel }} / {{ file.__progressLabel }}
+              {{ isMobile ? '' : file.__sizeLabel }} {{ isMobile ? '' : '/' }} {{ file.__progressLabel }}
             </div>
           </q-card-section>
         </q-card>
