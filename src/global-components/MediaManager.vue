@@ -217,11 +217,12 @@ const getFileIconName = (file) => {
         >
           <q-card-actions
             class="absolute-top q-py-none"
-            style="background-color: rgba(255, 255, 255, 0.5); z-index: 1;"
+            style="background-color: rgba(255, 255, 255, 0.6); z-index: 1;"
           >
             <q-btn
               flat
               round
+              :padding="isMobile ? 'none' : 'xs'"
               icon="o_download"
               size="sm"
               @click="handleDownloadFile(file.full_url)"
@@ -230,6 +231,7 @@ const getFileIconName = (file) => {
             <q-btn
               flat
               round
+              :padding="isMobile ? 'none' : 'xs'"
               color="negative"
               icon="o_delete"
               size="sm"
@@ -274,12 +276,13 @@ const getFileIconName = (file) => {
         >
           <q-card-actions
             class="absolute-top q-py-none"
-            style="background-color: rgba(255, 255, 255, 0.5); z-index: 1;"
+            style="background-color: rgba(255, 255, 255, 0.6); z-index: 1;"
           >
             <q-space />
             <q-btn
               flat
               round
+              :padding="isMobile ? 'none' : 'xs'"
               color="negative"
               icon="o_delete"
               size="sm"
