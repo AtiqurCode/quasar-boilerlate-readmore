@@ -20,7 +20,7 @@
         @input="$emit('input-search', searchValue)"
         @keyup.enter="$emit('enter-search', searchValue)"
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <q-icon name="search" />
         </template>
       </q-input>

@@ -19,7 +19,7 @@
         :class="{'q-ml-auto': right}"
         @input="handleFilter"
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <q-icon name="search" />
         </template>
       </q-input>
