@@ -17,9 +17,9 @@
         rounded
         style="width: 100%; max-width: 400px; display: block;"
         :class="{'q-ml-auto': right}"
-        @input="$emit('input-search', searchValue)"
-        @keyup.enter="$emit('enter-search', searchValue)"
       >
+        <!-- @input="$emit('input-search', searchValue)"
+        @keyup.enter="$emit('enter-search', searchValue)" -->
         <template #prepend>
           <q-icon name="search" />
         </template>
