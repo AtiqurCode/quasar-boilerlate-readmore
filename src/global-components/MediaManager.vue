@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { laFileCsvSolid, laFilePdf, laFileAlt, laFilePowerpoint, laFileArchive, laFileAudio, laFileWord, laFileExcel, laFileVideo, laFileCode } from '@quasar/extras/line-awesome'
 import { useCommonStore } from 'stores/common-store'
+import { API_BASE_URL } from 'src/consts'
 
 const props = defineProps({
   label: { type: String, default: 'Upload media' },
@@ -22,7 +23,7 @@ const isOpenLightBox = ref(false),
   lightBoxMedia = ref(null),
   mediaUploader = ref(null)
 
-const emit = defineEmits(['delete-attachment', 'uploaded-attachments'])
+const emit = defineEmits(['delete-attachment', 'uploaded-attachments', 'download-attachment'])
 
 const commonStore = useCommonStore()
 const handledeleteFile = (file) => {
@@ -39,13 +40,19 @@ const handledeleteFile = (file) => {
   })
 }
 
-const handleDownloadFile = (url) => {
+const handleDownloadFile = async (id, name) => {
+  const response = await fetch(`${API_BASE_URL('default')}/api/attachments/${id}/download`)
+  const blob = await response.blob()
+  const objectUrl = window.URL.createObjectURL(blob)
+
   const link = document.createElement('a')
-  link.href = url
+  link.href = objectUrl
   link.target = '_blank'
+  link.download = name
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
+  emit('download-attachment', id)
 }
 
 const openLightBox = (file) => {
@@ -225,7 +232,7 @@ const getFileIconName = (file) => {
               :padding="isMobile ? 'none' : 'xs'"
               icon="o_download"
               size="sm"
-              @click="handleDownloadFile(file.full_url)"
+              @click="handleDownloadFile(file.id, file.file_name)"
             />
             <q-space />
             <q-btn
