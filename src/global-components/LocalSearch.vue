@@ -19,7 +19,7 @@
         :class="{'q-ml-auto': right}"
         @input="handleFilter"
       >
-        <template v-slot:prepend>
+        <template #prepend>
           <q-icon name="search" />
         </template>
       </q-input>
@@ -45,11 +45,11 @@ export default {
 
   methods: {
     handleFilter (val) {
-      if (val) {
-        const userVal = val.toString()
-        const filtered = this.list.filter(item => item[this.filterKey].toLowerCase().indexOf(userVal) > -1)
-        this.$emit('input-search', filtered)
-      } else this.$emit('input-search', this.list)
+      // if (val) {
+      //   const userVal = val.toString()
+      //   const filtered = this.list.filter(item => item[this.filterKey].toLowerCase().indexOf(userVal) > -1)
+      //   this.$emit('input-search', filtered)
+      // } else this.$emit('input-search', this.list)
     }
   },
 

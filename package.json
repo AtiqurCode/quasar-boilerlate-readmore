@@ -7,7 +7,13 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "lint:fix": "eslint --ext .js,.vue ./ --fix",
+    "test": "echo \"No test specified\" && exit 0",
+    "quasar": "quasar",
+    "dev:web": "npm run lint:fix && npm run test && npm run quasar dev",
+    "dev:android": "npm run lint:fix && npm run test && npm run quasar dev -m capacitor -T android",
+    "build:web": "npm run lint:fix && npm run test && npm run quasar build",
+    "build:android": "npm run lint:fix && npm run test && npm run quasar build -m capacitor -T android"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.1",
@@ -22,6 +28,7 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@quasar/app-vite": "^1.0.6",
+    "@quasar/cli": "^1.3.2",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.10.0",
     "eslint-config-standard": "^17.0.0",

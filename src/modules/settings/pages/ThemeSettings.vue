@@ -8,7 +8,7 @@
       v-model="primary"
       label-color="primary"
     >
-      <template v-slot:option="scope">
+      <template #option="scope">
         <q-item
           clickable
           @click="setThemeColor(scope.opt)"
