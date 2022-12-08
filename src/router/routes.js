@@ -1,6 +1,10 @@
 import { routes as auth } from 'modules/auth'
 import { routes as register } from 'modules/register'
 import { routes as dashboard } from 'modules/dashboard'
+import { routes as mybooks } from 'modules/mybook'
+import { routes as myshare } from 'modules/myshare'
+import { routes as sharebook } from 'modules/shareBook'
+
 // import { routes as companies } from 'modules/companies'
 // import { routes as projects } from 'modules/projects'
 // import { routes as projectsJobs } from 'modules/projectsJobs'
@@ -13,6 +17,10 @@ const routes = [
   ...auth,
   ...register,
   ...dashboard,
+  ...mybooks,
+  ...myshare,
+  ...sharebook,
+
   // ...companies,
   // ...projects,
   // ...projectsJobs,

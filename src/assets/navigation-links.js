@@ -2,17 +2,17 @@ export const navLinks = [
   {
     label: 'Dashboard',
     icon: 'o_home',
-    hash: '/dashboard'
+    hash: '/'
   },
   {
-    label: 'Companies',
+    label: 'Mybooks',
     icon: 'o_card_travel',
-    hash: '/companies'
+    hash: '/mybooks'
   },
   {
-    label: 'Projects',
+    label: 'Sharebook',
     icon: 'o_format_list_numbered',
-    hash: '/projects'
+    hash: '/sharebook'
   },
   // {
   //   label: 'Projects & Jobs',
@@ -20,20 +20,20 @@ export const navLinks = [
   //   hash: '/projects-jobs'
   // },
   {
-    label: 'Customers',
+    label: 'Myshare',
     icon: 'o_supervised_user_circle',
-    hash: '/customers'
+    hash: '/myshare'
   },
-  {
-    label: 'Contacts',
-    icon: 'o_contacts',
-    hash: '/contacts'
-  },
-  {
-    label: 'User Access',
-    icon: 'o_verified_user',
-    hash: '/user-access'
-  },
+  // {
+  //   label: 'Setting',
+  //   icon: 'o_contacts',
+  //   hash: '/setting'
+  // },
+  // {
+  //   label: 'User Access',
+  //   icon: 'o_verified_user',
+  //   hash: '/user-access'
+  // },
   // {
   //   label: 'Inbox',
   //   icon: 'far fa-envelope',
