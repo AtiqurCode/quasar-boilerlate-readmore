@@ -273,6 +273,7 @@
 
 <script>
 import { ref } from 'vue'
+import AddBook from '../components/AddBook.vue'
 
 export default {
   data () {
@@ -284,7 +285,7 @@ export default {
     }
   },
   components: {
-    AddBook: () => import('../components/AddBook.vue')
+    AddBook
   },
   methods: {
     onCloseDialog () {
